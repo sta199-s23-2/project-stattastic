@@ -82,17 +82,37 @@ glimpse(spotify_songs)
 
 -   Identify the source of the data.
 
+    -   The data comes from the College Sports Budget from Tidy Tuesday.
+
 -   State when and how it was originally collected (by the original data curator, not necessarily how you found the data).
 
+    -   The data was originally collected by the Equity in Athletics Data Analysis database and originally from this NPR article: https://www.npr.org/2021/10/27/1049530975/ncaa-spends-more-on-mens-sports-report-reveals
+
 -   Write a brief description of the observations.
+
+    -   The dataset looks at every collegiate sports program and their teams, including data for their men and women\'s teams. The observations are broken down by participation numbers for both men and female teams in each sport in the program, the division of the program (DI vs. DII vs. DIII), and the expenditure values of the womens vs. mens programs.
 
 ## Research question
 
 -   A well formulated research question. (You may include more than one research question if you want to receive feedback on different ideas for your project. However, one per data set is required.)
 
+    -   Are there expenditure inequities in college sports across divisions (I vs. II vs. III) and gender? Have these gender expenditure inequities been improving with time?
+
 -   A description of the research topic along with a concise statement of your hypotheses on this topic.
 
+    -   Yes, there are expenditure differences between divisions because what differentiates programs largely relates to the resources on the athletic department and school size (and therefore, money). When looking specifically at Division I sports programs, there are expenditure differences between men and women\'s teams, but they have been improving over the years based on societal changes.
+
 -   Identify the types of variables in your research question. Categorical? Quantitative?
+
+    -   Gender expenditures (men and female are different categories) = quantitative
+
+    -   Classification (division) = categorical
+
+    -   Totalexpenditure (for both men and women combined) = quantitative
+
+    -   Year = quantitative
+
+    -   Sport = categorical
 
 ## Literature
 
