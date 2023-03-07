@@ -90,7 +90,7 @@ glimpse(spotify_songs)
 
 -   Write a brief description of the observations.
 
-    -   The dataset looks at every collegiate sports program and their teams, including data for their men and women\'s teams. The observations are broken down by participation numbers for both men and female teams in each sport in the program, the division of the program (DI vs. DII vs. DIII), and the expenditure values of the womens vs. mens programs.
+    -   The dataset looks at every collegiate sports program and their teams, including data for their men and women's teams. The observations are broken down by participation numbers for both men and female teams in each sport in the program, the division of the program (DI vs. DII vs. DIII), and the expenditure values of the womens vs. mens programs.
 
 ## Research question
 
@@ -100,7 +100,7 @@ glimpse(spotify_songs)
 
 -   A description of the research topic along with a concise statement of your hypotheses on this topic.
 
-    -   Yes, there are expenditure differences between divisions because what differentiates programs largely relates to the resources on the athletic department and school size (and therefore, money). When looking specifically at Division I sports programs, there are expenditure differences between men and women\'s teams, but they have been improving over the years based on societal changes.
+    -   Yes, there are expenditure differences between divisions because what differentiates programs largely relates to the resources on the athletic department and school size (and therefore, money). When looking specifically at Division I sports programs, there are expenditure differences between men and women's teams, but they have been improving over the years based on societal changes.
 
 -   Identify the types of variables in your research question. Categorical? Quantitative?
 
@@ -118,9 +118,15 @@ glimpse(spotify_songs)
 
 -   Find one published credible article on the topic you are interested in researching.
 
+    -   <https://www.espn.com/college-sports/story/_/id/32481915/second-ncaa-gender-equity-report-shows-more-money-spent-male-athletes-female-ones>
+
 -   Provide a one paragraph summary about the article.
 
+    -   This article looks at the average money spent by the NCAA on men vs women. An NCAA gender equity report found that, on average, the NCAA spends more money on male athletes than female athletes. For example, looking at D1 and national championship participants (excluding basketball) in 2018-2019, money spent on female participants was on average \$1700 less than for male participants. The report also found that this gap is greater in the 6 single gender sports.  
+
 -   In 1-2 sentences, explain how your research question builds on / is different than the article you have cited.
+
+    -   Our research question will also analyze differences in gender equity in college sports, however we will also analyze how this difference has changed over time and how it differs betweent divisions. We will also look at equity differences between sports. 
 
 ## Glimpse of data
 
