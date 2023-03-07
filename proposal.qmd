@@ -122,5 +122,7 @@ glimpse(sports)
 ```{r}
 #| label: load-data-3
 
-# add code here
+ramen_ratings <- readr::read_csv("https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2019/2019-06-04/ramen_ratings.csv")
+
+glimpse(ramen_ratings)
 ```
