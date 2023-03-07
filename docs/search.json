@@ -16,91 +16,91 @@
   {
     "objectID": "proposal.html",
     "href": "proposal.html",
-    "title": "Project title",
+    "title": "Spotify, Sports, and Soup",
     "section": "",
     "text": "library(tidyverse)"
   },
   {
     "objectID": "proposal.html#introduction-and-data",
     "href": "proposal.html#introduction-and-data",
-    "title": "Project title",
+    "title": "Spotify, Sports, and Soup",
     "section": "Introduction and data",
     "text": "Introduction and data\n\nIdentify the source of the data.\n\nThis data set comes from Spotify via the spotifyr package.\n\nState when and how it was originally collected (by the original data curator, not necessarily how you found the data).\n\nThe data set was authored by Charlie Thompson, Josiah Parry, Donal Phipps, and Tom Wolff to make it easier to get data or general metadata on songs.\n\nWrite a brief description of the observations.\n\nThis dataset contains about 5,000 songs from 6 main music categories (EDM, Latin, Pop, R&B, Rap, and Rock). For each song there contains general information such as the songs album, artist, release data, but also more interesting statistics on danceability, energy, and popularity."
   },
   {
     "objectID": "proposal.html#research-question",
     "href": "proposal.html#research-question",
-    "title": "Project title",
+    "title": "Spotify, Sports, and Soup",
     "section": "Research question",
     "text": "Research question\n\nA well formulated research question. (You may include more than one research question if you want to receive feedback on different ideas for your project. However, one per data set is required.)\n\nWhich combination of variables would be the best predictor of genre?\nHow does danceability affect popularity of songs of the Latin genre? How about for the Rap genre? Which genre does danceability matter the most when determining popularity?\n\nA description of the research topic along with a concise statement of your hypotheses on this topic.\n\nOur hypothesis is that in the end there will need to be different variables used to calculate likelihood of genre’s but for one general predictor I’d imagine that instrumentalness and danceability would be the best combination to determine.\nFor the second question, I believe that danceability will contribute a larger amount toward popularity for Latin music than Rap music. I also believe that danceability contributes the most to latin music overall.\n\nIdentify the types of variables in your research question. Categorical? Quantitative?\n\nThere is categorical data that explains more general information about the song such as the album name, artist name, genre, but there is also a lot of quantitative data that measures features of the song like danceability, energy, and loudness."
   },
   {
     "objectID": "proposal.html#literature",
     "href": "proposal.html#literature",
-    "title": "Project title",
+    "title": "Spotify, Sports, and Soup",
     "section": "Literature",
     "text": "Literature\n\nFind one published credible article on the topic you are interested in researching.\n\nhttps://www.analyticssteps.com/blogs/how-spotify-using-big-data\n\nProvide a one paragraph summary about the article.\n\nThis article provides insight into how Spotify uses its data to provide a better experience for its users. The three main ways Spotify uses data are to develop personalized content, digitize the user’s taste, enhance marketing through targeted ads, continuously update its system, and create Spotify wrapped. Spotify has not claimed a spot in an incredibly competitive industry but has beaten impressive competitors such as Apple and Amazon due to its reliance on data to provide users with music and content they know they will enjoy.\n\nIn 1-2 sentences, explain how your research question builds on / is different than the article you have cited.\n\nSome of our research questions focus on how different factors affect popularity. This question is critical to consider because if we can adequately predict popularity, then, similar to Spotify, we may be able to predict which songs people will like as soon as they’re released."
   },
   {
     "objectID": "proposal.html#glimpse-of-data",
     "href": "proposal.html#glimpse-of-data",
-    "title": "Project title",
+    "title": "Spotify, Sports, and Soup",
     "section": "Glimpse of data",
     "text": "Glimpse of data\n\nspotify_songs <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-01-21/spotify_songs.csv')\n\nRows: 32833 Columns: 23\n── Column specification ────────────────────────────────────────────────────────\nDelimiter: \",\"\nchr (10): track_id, track_name, track_artist, track_album_id, track_album_na...\ndbl (13): track_popularity, danceability, energy, key, loudness, mode, speec...\n\nℹ Use `spec()` to retrieve the full column specification for this data.\nℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.\n\ntuesdata <- tidytuesdayR::tt_load('2020-01-21') \n\n--- Compiling #TidyTuesday Information for 2020-01-21 ----\n--- There is 1 file available ---\n--- Starting Download ---\n\n\n\n    Downloading file 1 of 1: `spotify_songs.csv`\n\n\n--- Download complete ---\n\ntuesdata <- tidytuesdayR::tt_load(2020, week = 4)\n\n--- Compiling #TidyTuesday Information for 2020-01-21 ----\n--- There is 1 file available ---\n--- Starting Download ---\n\n\n\n    Downloading file 1 of 1: `spotify_songs.csv`\n\n\n--- Download complete ---\n\nspotify_songs <- tuesdata$spotify_songs\n\nglimpse(spotify_songs)\n\nRows: 32,833\nColumns: 23\n$ track_id                 <chr> \"6f807x0ima9a1j3VPbc7VN\", \"0r7CVbZTWZgbTCYdfa…\n$ track_name               <chr> \"I Don't Care (with Justin Bieber) - Loud Lux…\n$ track_artist             <chr> \"Ed Sheeran\", \"Maroon 5\", \"Zara Larsson\", \"Th…\n$ track_popularity         <dbl> 66, 67, 70, 60, 69, 67, 62, 69, 68, 67, 58, 6…\n$ track_album_id           <chr> \"2oCs0DGTsRO98Gh5ZSl2Cx\", \"63rPSO264uRjW1X5E6…\n$ track_album_name         <chr> \"I Don't Care (with Justin Bieber) [Loud Luxu…\n$ track_album_release_date <chr> \"2019-06-14\", \"2019-12-13\", \"2019-07-05\", \"20…\n$ playlist_name            <chr> \"Pop Remix\", \"Pop Remix\", \"Pop Remix\", \"Pop R…\n$ playlist_id              <chr> \"37i9dQZF1DXcZDD7cfEKhW\", \"37i9dQZF1DXcZDD7cf…\n$ playlist_genre           <chr> \"pop\", \"pop\", \"pop\", \"pop\", \"pop\", \"pop\", \"po…\n$ playlist_subgenre        <chr> \"dance pop\", \"dance pop\", \"dance pop\", \"dance…\n$ danceability             <dbl> 0.748, 0.726, 0.675, 0.718, 0.650, 0.675, 0.4…\n$ energy                   <dbl> 0.916, 0.815, 0.931, 0.930, 0.833, 0.919, 0.8…\n$ key                      <dbl> 6, 11, 1, 7, 1, 8, 5, 4, 8, 2, 6, 8, 1, 5, 5,…\n$ loudness                 <dbl> -2.634, -4.969, -3.432, -3.778, -4.672, -5.38…\n$ mode                     <dbl> 1, 1, 0, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 0, 0, …\n$ speechiness              <dbl> 0.0583, 0.0373, 0.0742, 0.1020, 0.0359, 0.127…\n$ acousticness             <dbl> 0.10200, 0.07240, 0.07940, 0.02870, 0.08030, …\n$ instrumentalness         <dbl> 0.00e+00, 4.21e-03, 2.33e-05, 9.43e-06, 0.00e…\n$ liveness                 <dbl> 0.0653, 0.3570, 0.1100, 0.2040, 0.0833, 0.143…\n$ valence                  <dbl> 0.518, 0.693, 0.613, 0.277, 0.725, 0.585, 0.1…\n$ tempo                    <dbl> 122.036, 99.972, 124.008, 121.956, 123.976, 1…\n$ duration_ms              <dbl> 194754, 162600, 176616, 169093, 189052, 16304…"
   },
   {
     "objectID": "proposal.html#introduction-and-data-1",
     "href": "proposal.html#introduction-and-data-1",
-    "title": "Project title",
+    "title": "Spotify, Sports, and Soup",
     "section": "Introduction and data",
     "text": "Introduction and data\n\nIdentify the source of the data.\nState when and how it was originally collected (by the original data curator, not necessarily how you found the data).\nWrite a brief description of the observations."
   },
   {
     "objectID": "proposal.html#research-question-1",
     "href": "proposal.html#research-question-1",
-    "title": "Project title",
+    "title": "Spotify, Sports, and Soup",
     "section": "Research question",
     "text": "Research question\n\nA well formulated research question. (You may include more than one research question if you want to receive feedback on different ideas for your project. However, one per data set is required.)\nA description of the research topic along with a concise statement of your hypotheses on this topic.\nIdentify the types of variables in your research question. Categorical? Quantitative?"
   },
   {
     "objectID": "proposal.html#literature-1",
     "href": "proposal.html#literature-1",
-    "title": "Project title",
+    "title": "Spotify, Sports, and Soup",
     "section": "Literature",
     "text": "Literature\n\nFind one published credible article on the topic you are interested in researching.\nProvide a one paragraph summary about the article.\nIn 1-2 sentences, explain how your research question builds on / is different than the article you have cited."
   },
   {
     "objectID": "proposal.html#glimpse-of-data-1",
     "href": "proposal.html#glimpse-of-data-1",
-    "title": "Project title",
+    "title": "Spotify, Sports, and Soup",
     "section": "Glimpse of data",
     "text": "Glimpse of data\n\nsports <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2022/2022-03-29/sports.csv')\n\nRows: 132327 Columns: 28\n── Column specification ────────────────────────────────────────────────────────\nDelimiter: \",\"\nchr  (8): institution_name, city_txt, state_cd, zip_text, classification_nam...\ndbl (20): year, unitid, classification_code, ef_male_count, ef_female_count,...\n\nℹ Use `spec()` to retrieve the full column specification for this data.\nℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.\n\nglimpse(sports)\n\nRows: 132,327\nColumns: 28\n$ year                 <dbl> 2015, 2015, 2015, 2015, 2015, 2015, 2015, 2015, 2…\n$ unitid               <dbl> 100654, 100654, 100654, 100654, 100654, 100654, 1…\n$ institution_name     <chr> \"Alabama A & M University\", \"Alabama A & M Univer…\n$ city_txt             <chr> \"Normal\", \"Normal\", \"Normal\", \"Normal\", \"Normal\",…\n$ state_cd             <chr> \"AL\", \"AL\", \"AL\", \"AL\", \"AL\", \"AL\", \"AL\", \"AL\", \"…\n$ zip_text             <chr> \"35762\", \"35762\", \"35762\", \"35762\", \"35762\", \"357…\n$ classification_code  <dbl> 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1…\n$ classification_name  <chr> \"NCAA Division I-FCS\", \"NCAA Division I-FCS\", \"NC…\n$ classification_other <chr> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…\n$ ef_male_count        <dbl> 1923, 1923, 1923, 1923, 1923, 1923, 1923, 1923, 1…\n$ ef_female_count      <dbl> 2300, 2300, 2300, 2300, 2300, 2300, 2300, 2300, 2…\n$ ef_total_count       <dbl> 4223, 4223, 4223, 4223, 4223, 4223, 4223, 4223, 4…\n$ sector_cd            <dbl> 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1…\n$ sector_name          <chr> \"Public, 4-year or above\", \"Public, 4-year or abo…\n$ sportscode           <dbl> 1, 2, 3, 7, 8, 15, 16, 22, 26, 33, 1, 2, 3, 8, 12…\n$ partic_men           <dbl> 31, 19, 61, 99, 9, NA, NA, 7, NA, NA, 32, 13, NA,…\n$ partic_women         <dbl> NA, 16, 46, NA, NA, 21, 25, 10, 16, 9, NA, 20, 68…\n$ partic_coed_men      <dbl> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…\n$ partic_coed_women    <dbl> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…\n$ sum_partic_men       <dbl> 31, 19, 61, 99, 9, 0, 0, 7, 0, 0, 32, 13, 0, 10, …\n$ sum_partic_women     <dbl> 0, 16, 46, 0, 0, 21, 25, 10, 16, 9, 0, 20, 68, 7,…\n$ rev_men              <dbl> 345592, 1211095, 183333, 2808949, 78270, NA, NA, …\n$ rev_women            <dbl> NA, 748833, 315574, NA, NA, 410717, 298164, 13114…\n$ total_rev_menwomen   <dbl> 345592, 1959928, 498907, 2808949, 78270, 410717, …\n$ exp_men              <dbl> 397818, 817868, 246949, 3059353, 83913, NA, NA, 9…\n$ exp_women            <dbl> NA, 742460, 251184, NA, NA, 432648, 340259, 11388…\n$ total_exp_menwomen   <dbl> 397818, 1560328, 498133, 3059353, 83913, 432648, …\n$ sports               <chr> \"Baseball\", \"Basketball\", \"All Track Combined\", \"…"
   },
   {
     "objectID": "proposal.html#introduction-and-data-2",
     "href": "proposal.html#introduction-and-data-2",
-    "title": "Project title",
+    "title": "Spotify, Sports, and Soup",
     "section": "Introduction and data",
-    "text": "Introduction and data\n\nIdentify the source of the data.\nState when and how it was originally collected (by the original data curator, not necessarily how you found the data).\nWrite a brief description of the observations."
+    "text": "Introduction and data\n\nIdentify the source of the data.\n\nThe source of this data is from The Ramen Rater’s Big List.\n\nState when and how it was originally collected (by the original data curator, not necessarily how you found the data).\n\nThis data was created and collected by the founder of the Ramen Rater, Hiens Lienesch. He has been eating and reviewing different brands and flavors of Ramen since 2002. He has reviewed 4300 types of Ramen and created a dataset with their flavors, brands, and ratings. This dataset includes his findings up until 2020.\n\nWrite a brief description of the observations.\n\nFor each of his reviews, he includes the review number, brand of ramen, variety, style, country, and number of starts. There are many varieties offered by the same brand. He has rated the flavors from within each brand to create a comprehensive rating system."
   },
   {
     "objectID": "proposal.html#research-question-2",
     "href": "proposal.html#research-question-2",
-    "title": "Project title",
+    "title": "Spotify, Sports, and Soup",
     "section": "Research question",
-    "text": "Research question\n\nA well formulated research question. (You may include more than one research question if you want to receive feedback on different ideas for your project. However, one per data set is required.)\nA description of the research topic along with a concise statement of your hypotheses on this topic.\nIdentify the types of variables in your research question. Categorical? Quantitative?"
+    "text": "Research question\n\nA well formulated research question. (You may include more than one research question if you want to receive feedback on different ideas for your project. However, one per data set is required.)\n\nAre ratings of ramen different based on their style: Are cups, packs, boxes, or bowls rate higher overall? What brand of ramen has the highest rating? Do certain countries create ramen with higher ratings?\n\nA description of the research topic along with a concise statement of your hypotheses on this topic.\n\nThis research topic is analyzing ramen preferences based on origin, style, and brand. We hypothesize that the ramen brands that originate from Japan will have higher ratings, because ramen is a traditional Japanese dish. Additionally, we hypothesize that bowls will have higher ratings, because their packaging is more consistent with a traditional serving style.\n\nIdentify the types of variables in your research question. Categorical? Quantitative?\n\nThere are multiple categorical variables: Brand, Variety, Style, Country. The quantitative variables are review number and stars."
   },
   {
     "objectID": "proposal.html#literature-2",
     "href": "proposal.html#literature-2",
-    "title": "Project title",
+    "title": "Spotify, Sports, and Soup",
     "section": "Literature",
-    "text": "Literature\n\nFind one published credible article on the topic you are interested in researching.\nProvide a one paragraph summary about the article.\nIn 1-2 sentences, explain how your research question builds on / is different than the article you have cited."
+    "text": "Literature\n\nFind one published credible article on the topic you are interested in researching.\n\nhttps://towardsdatascience.com/exploring-the-world-of-ramen-through-text-analytics-1131280c4c6b\n\nProvide a one paragraph summary about the article.\n\nThis article analyzes the big list to discover what the most popular ramen themes are around the world. Specifically, it looks for the use of specific words within the names of popular ramen brands. Because this list includes ramen data from 38 countries, it is informative on what ramen names are used most frequently. The article’s author found unigrams such as “noodles”, “noodle”, “flavour”, “chicken”, and “cup”. They then found the frequency of these words within the dataset. Then they analyzed these words to see if they were logical in titles. Some frequently used words had to be modified for clarity, such as “tom” to “tom yum” a certain kind of soup. They then organized these themes by country and found that certain countries produce certain themes of ramen. The USA had a frequent use of chicken, soup, spicy. They then visualized these distributions through a map. This article analyzes the many ways you can modify and look at this unique dataset. The information extracted from the data helped inform their ramen purchases.\n\nIn 1-2 sentences, explain how your research question builds on / is different than the article you have cited.\n\nOur research question analyzes which country has the highest rated ramen. This dataset looked into popular types of ramen by country, while ours will analyze which country produces the best Ramen."
   },
   {
     "objectID": "proposal.html#glimpse-of-data-2",
     "href": "proposal.html#glimpse-of-data-2",
-    "title": "Project title",
+    "title": "Spotify, Sports, and Soup",
     "section": "Glimpse of data",
     "text": "Glimpse of data\n\nramen_ratings <- readr::read_csv(\"https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2019/2019-06-04/ramen_ratings.csv\")\n\nRows: 3180 Columns: 6\n── Column specification ────────────────────────────────────────────────────────\nDelimiter: \",\"\nchr (4): brand, variety, style, country\ndbl (2): review_number, stars\n\nℹ Use `spec()` to retrieve the full column specification for this data.\nℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.\n\nglimpse(ramen_ratings)\n\nRows: 3,180\nColumns: 6\n$ review_number <dbl> 3180, 3179, 3178, 3177, 3176, 3175, 3174, 3173, 3172, 31…\n$ brand         <chr> \"Yum Yum\", \"Nagatanien\", \"Acecook\", \"Maison de Coree\", \"…\n$ variety       <chr> \"Tem Tem Tom Yum Moo Deng\", \"tom Yum Kung Rice Vermicell…\n$ style         <chr> \"Cup\", \"Pack\", \"Cup\", \"Cup\", \"Tray\", \"Cup\", \"Pack\", \"Pac…\n$ country       <chr> \"Thailand\", \"Japan\", \"Japan\", \"France\", \"Japan\", \"Japan\"…\n$ stars         <dbl> 3.75, 2.00, 2.50, 3.75, 5.00, 3.50, 3.75, 5.00, 3.50, 4.…"
   },
