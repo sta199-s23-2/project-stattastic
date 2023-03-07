@@ -86,7 +86,9 @@ glimpse(spotify_songs)
 ```{r}
 #| label: load-data-2
 
-# add code here
+sports <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2022/2022-03-29/sports.csv')
+
+glimpse(sports)
 ```
 
 # Data 3
