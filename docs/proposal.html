@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.0.36">
+<meta name="generator" content="quarto-1.1.251">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -11,10 +11,15 @@
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
-span.underline{text-decoration: underline;}
-div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
@@ -53,7 +58,7 @@ code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
 code span.at { color: #7d9029; } /* Attribute */
 code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
+code span.bu { color: #008000; } /* BuiltIn */
 code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
 code span.ch { color: #4070a0; } /* Char */
 code span.cn { color: #880000; } /* Constant */
@@ -66,7 +71,7 @@ code span.er { color: #ff0000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
 code span.fl { color: #40a070; } /* Float */
 code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
+code span.im { color: #008000; font-weight: bold; } /* Import */
 code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 code span.kw { color: #007020; font-weight: bold; } /* Keyword */
 code span.op { color: #666666; } /* Operator */
@@ -157,7 +162,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc">
+        <nav id="TOC" role="doc-toc" class="toc-active">
     <h2 id="toc-title">On this page</h2>
    
   <ul>
@@ -207,49 +212,132 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: package 'ggplot2' was built under R version 4.2.2</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: package 'tidyr' was built under R version 4.2.2</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: package 'readr' was built under R version 4.2.2</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: package 'purrr' was built under R version 4.2.2</code></pre>
-</div>
 </div>
 <section id="data-1" class="level1">
 <h1>Data 1</h1>
 <section id="introduction-and-data" class="level2">
 <h2 class="anchored" data-anchor-id="introduction-and-data">Introduction and data</h2>
 <ul>
-<li><p>Identify the source of the data.</p></li>
-<li><p>State when and how it was originally collected (by the original data curator, not necessarily how you found the data).</p></li>
-<li><p>Write a brief description of the observations.</p></li>
+<li><p>Identify the source of the data.</p>
+<ul>
+<li>This data set comes from Spotify via the spotifyr package.</li>
+</ul></li>
+<li><p>State when and how it was originally collected (by the original data curator, not necessarily how you found the data).</p>
+<ul>
+<li>The data set was authored by Charlie Thompson, Josiah Parry, Donal Phipps, and Tom Wolff to make it easier to get data or general metadata on songs.</li>
+</ul></li>
+<li><p>Write a brief description of the observations.</p>
+<ul>
+<li>This dataset contains about 5,000 songs from 6 main music categories (EDM, Latin, Pop, R&amp;B, Rap, and Rock). For each song there contains general information such as the songs album, artist, release data, but also more interesting statistics on danceability, energy, and popularity.</li>
+</ul></li>
 </ul>
 </section>
 <section id="research-question" class="level2">
 <h2 class="anchored" data-anchor-id="research-question">Research question</h2>
 <ul>
-<li>A well formulated research question. (You may include more than one research question if you want to receive feedback on different ideas for your project. However, one per data set is required.)</li>
-<li>A description of the research topic along with a concise statement of your hypotheses on this topic.</li>
-<li>Identify the types of variables in your research question. Categorical? Quantitative?</li>
+<li><p>A well formulated research question. (You may include more than one research question if you want to receive feedback on different ideas for your project. However, one per data set is required.)</p>
+<ul>
+<li><p>Which combination of variables would be the best predictor of genre?</p></li>
+<li><p>How does danceability affect popularity of songs of the Latin genre? How about for the Rap genre? Which genre does danceability matter the most when determining popularity?</p></li>
+</ul></li>
+<li><p>A description of the research topic along with a concise statement of your hypotheses on this topic.</p>
+<ul>
+<li>Our hypothesis is that in the end there will need to be different variables used to calculate likelihood of genre’s but for one general predictor I’d imagine that instrumentalness and danceability would be the best combination to determine.</li>
+<li>For the second question, I believe that danceability will contribute a larger amount toward popularity for Latin music than Rap music. I also believe that danceability contributes the most to latin music overall.</li>
+</ul></li>
+<li><p>Identify the types of variables in your research question. Categorical? Quantitative?</p>
+<ul>
+<li>There is categorical data that explains more general information about the song such as the album name, artist name, genre, but there is also a lot of quantitative data that measures features of the song like danceability, energy, and loudness.</li>
+</ul></li>
 </ul>
 </section>
 <section id="literature" class="level2">
 <h2 class="anchored" data-anchor-id="literature">Literature</h2>
 <ul>
-<li><p>Find one published credible article on the topic you are interested in researching.</p></li>
-<li><p>Provide a one paragraph summary about the article.</p></li>
-<li><p>In 1-2 sentences, explain how your research question builds on / is different than the article you have cited.</p></li>
+<li><p>Find one published credible article on the topic you are interested in researching.</p>
+<ul>
+<li>https://www.analyticssteps.com/blogs/how-spotify-using-big-data</li>
+</ul></li>
+<li><p>Provide a one paragraph summary about the article.</p>
+<ul>
+<li>This article provides insight into how Spotify uses its data to provide a better experience for its users. The three main ways Spotify uses data are to develop personalized content, digitize the user’s taste, enhance marketing through targeted ads, continuously update its system, and create Spotify wrapped. Spotify has not claimed a spot in an incredibly competitive industry but has beaten impressive competitors such as Apple and Amazon due to its reliance on data to provide users with music and content they know they will enjoy.</li>
+</ul></li>
+<li><p>In 1-2 sentences, explain how your research question builds on / is different than the article you have cited.</p>
+<ul>
+<li>Some of our research questions focus on how different factors affect popularity. This question is critical to consider because if we can adequately predict popularity, then, similar to Spotify, we may be able to predict which songs people will like as soon as they’re released.</li>
+</ul></li>
 </ul>
 </section>
 <section id="glimpse-of-data" class="level2">
 <h2 class="anchored" data-anchor-id="glimpse-of-data">Glimpse of data</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># add code here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>spotify_songs <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="st">'https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-01-21/spotify_songs.csv'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Rows: 32833 Columns: 23
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr (10): track_id, track_name, track_artist, track_album_id, track_album_na...
+dbl (13): track_popularity, danceability, energy, key, loudness, mode, speec...
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>tuesdata <span class="ot">&lt;-</span> tidytuesdayR<span class="sc">::</span><span class="fu">tt_load</span>(<span class="st">'2020-01-21'</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>--- Compiling #TidyTuesday Information for 2020-01-21 ----
+--- There is 1 file available ---
+--- Starting Download ---</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Downloading file 1 of 1: `spotify_songs.csv`</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>--- Download complete ---</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>tuesdata <span class="ot">&lt;-</span> tidytuesdayR<span class="sc">::</span><span class="fu">tt_load</span>(<span class="dv">2020</span>, <span class="at">week =</span> <span class="dv">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>--- Compiling #TidyTuesday Information for 2020-01-21 ----
+--- There is 1 file available ---
+--- Starting Download ---</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Downloading file 1 of 1: `spotify_songs.csv`</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>--- Download complete ---</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>spotify_songs <span class="ot">&lt;-</span> tuesdata<span class="sc">$</span>spotify_songs</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(spotify_songs)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 32,833
+Columns: 23
+$ track_id                 &lt;chr&gt; "6f807x0ima9a1j3VPbc7VN", "0r7CVbZTWZgbTCYdfa…
+$ track_name               &lt;chr&gt; "I Don't Care (with Justin Bieber) - Loud Lux…
+$ track_artist             &lt;chr&gt; "Ed Sheeran", "Maroon 5", "Zara Larsson", "Th…
+$ track_popularity         &lt;dbl&gt; 66, 67, 70, 60, 69, 67, 62, 69, 68, 67, 58, 6…
+$ track_album_id           &lt;chr&gt; "2oCs0DGTsRO98Gh5ZSl2Cx", "63rPSO264uRjW1X5E6…
+$ track_album_name         &lt;chr&gt; "I Don't Care (with Justin Bieber) [Loud Luxu…
+$ track_album_release_date &lt;chr&gt; "2019-06-14", "2019-12-13", "2019-07-05", "20…
+$ playlist_name            &lt;chr&gt; "Pop Remix", "Pop Remix", "Pop Remix", "Pop R…
+$ playlist_id              &lt;chr&gt; "37i9dQZF1DXcZDD7cfEKhW", "37i9dQZF1DXcZDD7cf…
+$ playlist_genre           &lt;chr&gt; "pop", "pop", "pop", "pop", "pop", "pop", "po…
+$ playlist_subgenre        &lt;chr&gt; "dance pop", "dance pop", "dance pop", "dance…
+$ danceability             &lt;dbl&gt; 0.748, 0.726, 0.675, 0.718, 0.650, 0.675, 0.4…
+$ energy                   &lt;dbl&gt; 0.916, 0.815, 0.931, 0.930, 0.833, 0.919, 0.8…
+$ key                      &lt;dbl&gt; 6, 11, 1, 7, 1, 8, 5, 4, 8, 2, 6, 8, 1, 5, 5,…
+$ loudness                 &lt;dbl&gt; -2.634, -4.969, -3.432, -3.778, -4.672, -5.38…
+$ mode                     &lt;dbl&gt; 1, 1, 0, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 0, 0, …
+$ speechiness              &lt;dbl&gt; 0.0583, 0.0373, 0.0742, 0.1020, 0.0359, 0.127…
+$ acousticness             &lt;dbl&gt; 0.10200, 0.07240, 0.07940, 0.02870, 0.08030, …
+$ instrumentalness         &lt;dbl&gt; 0.00e+00, 4.21e-03, 2.33e-05, 9.43e-06, 0.00e…
+$ liveness                 &lt;dbl&gt; 0.0653, 0.3570, 0.1100, 0.2040, 0.0833, 0.143…
+$ valence                  &lt;dbl&gt; 0.518, 0.693, 0.613, 0.277, 0.725, 0.585, 0.1…
+$ tempo                    &lt;dbl&gt; 122.036, 99.972, 124.008, 121.956, 123.976, 1…
+$ duration_ms              &lt;dbl&gt; 194754, 162600, 176616, 169093, 189052, 16304…</code></pre>
+</div>
 </div>
 </section>
 </section>
@@ -266,9 +354,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <section id="research-question-1" class="level2">
 <h2 class="anchored" data-anchor-id="research-question-1">Research question</h2>
 <ul>
-<li>A well formulated research question. (You may include more than one research question if you want to receive feedback on different ideas for your project. However, one per data set is required.)</li>
-<li>A description of the research topic along with a concise statement of your hypotheses on this topic.</li>
-<li>Identify the types of variables in your research question. Categorical? Quantitative?</li>
+<li><p>A well formulated research question. (You may include more than one research question if you want to receive feedback on different ideas for your project. However, one per data set is required.)</p></li>
+<li><p>A description of the research topic along with a concise statement of your hypotheses on this topic.</p></li>
+<li><p>Identify the types of variables in your research question. Categorical? Quantitative?</p></li>
 </ul>
 </section>
 <section id="literature-1" class="level2">
@@ -282,7 +370,50 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <section id="glimpse-of-data-1" class="level2">
 <h2 class="anchored" data-anchor-id="glimpse-of-data-1">Glimpse of data</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># add code here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>sports <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="st">'https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2022/2022-03-29/sports.csv'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Rows: 132327 Columns: 28
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr  (8): institution_name, city_txt, state_cd, zip_text, classification_nam...
+dbl (20): year, unitid, classification_code, ef_male_count, ef_female_count,...
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(sports)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 132,327
+Columns: 28
+$ year                 &lt;dbl&gt; 2015, 2015, 2015, 2015, 2015, 2015, 2015, 2015, 2…
+$ unitid               &lt;dbl&gt; 100654, 100654, 100654, 100654, 100654, 100654, 1…
+$ institution_name     &lt;chr&gt; "Alabama A &amp; M University", "Alabama A &amp; M Univer…
+$ city_txt             &lt;chr&gt; "Normal", "Normal", "Normal", "Normal", "Normal",…
+$ state_cd             &lt;chr&gt; "AL", "AL", "AL", "AL", "AL", "AL", "AL", "AL", "…
+$ zip_text             &lt;chr&gt; "35762", "35762", "35762", "35762", "35762", "357…
+$ classification_code  &lt;dbl&gt; 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1…
+$ classification_name  &lt;chr&gt; "NCAA Division I-FCS", "NCAA Division I-FCS", "NC…
+$ classification_other &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…
+$ ef_male_count        &lt;dbl&gt; 1923, 1923, 1923, 1923, 1923, 1923, 1923, 1923, 1…
+$ ef_female_count      &lt;dbl&gt; 2300, 2300, 2300, 2300, 2300, 2300, 2300, 2300, 2…
+$ ef_total_count       &lt;dbl&gt; 4223, 4223, 4223, 4223, 4223, 4223, 4223, 4223, 4…
+$ sector_cd            &lt;dbl&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1…
+$ sector_name          &lt;chr&gt; "Public, 4-year or above", "Public, 4-year or abo…
+$ sportscode           &lt;dbl&gt; 1, 2, 3, 7, 8, 15, 16, 22, 26, 33, 1, 2, 3, 8, 12…
+$ partic_men           &lt;dbl&gt; 31, 19, 61, 99, 9, NA, NA, 7, NA, NA, 32, 13, NA,…
+$ partic_women         &lt;dbl&gt; NA, 16, 46, NA, NA, 21, 25, 10, 16, 9, NA, 20, 68…
+$ partic_coed_men      &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…
+$ partic_coed_women    &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…
+$ sum_partic_men       &lt;dbl&gt; 31, 19, 61, 99, 9, 0, 0, 7, 0, 0, 32, 13, 0, 10, …
+$ sum_partic_women     &lt;dbl&gt; 0, 16, 46, 0, 0, 21, 25, 10, 16, 9, 0, 20, 68, 7,…
+$ rev_men              &lt;dbl&gt; 345592, 1211095, 183333, 2808949, 78270, NA, NA, …
+$ rev_women            &lt;dbl&gt; NA, 748833, 315574, NA, NA, 410717, 298164, 13114…
+$ total_rev_menwomen   &lt;dbl&gt; 345592, 1959928, 498907, 2808949, 78270, 410717, …
+$ exp_men              &lt;dbl&gt; 397818, 817868, 246949, 3059353, 83913, NA, NA, 9…
+$ exp_women            &lt;dbl&gt; NA, 742460, 251184, NA, NA, 432648, 340259, 11388…
+$ total_exp_menwomen   &lt;dbl&gt; 397818, 1560328, 498133, 3059353, 83913, 432648, …
+$ sports               &lt;chr&gt; "Baseball", "Basketball", "All Track Combined", "…</code></pre>
+</div>
 </div>
 </section>
 </section>
@@ -299,9 +430,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <section id="research-question-2" class="level2">
 <h2 class="anchored" data-anchor-id="research-question-2">Research question</h2>
 <ul>
-<li>A well formulated research question. (You may include more than one research question if you want to receive feedback on different ideas for your project. However, one per data set is required.)</li>
-<li>A description of the research topic along with a concise statement of your hypotheses on this topic.</li>
-<li>Identify the types of variables in your research question. Categorical? Quantitative?</li>
+<li><p>A well formulated research question. (You may include more than one research question if you want to receive feedback on different ideas for your project. However, one per data set is required.)</p></li>
+<li><p>A description of the research topic along with a concise statement of your hypotheses on this topic.</p></li>
+<li><p>Identify the types of variables in your research question. Categorical? Quantitative?</p></li>
 </ul>
 </section>
 <section id="literature-2" class="level2">
@@ -315,7 +446,28 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <section id="glimpse-of-data-2" class="level2">
 <h2 class="anchored" data-anchor-id="glimpse-of-data-2">Glimpse of data</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># add code here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>ramen_ratings <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="st">"https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2019/2019-06-04/ramen_ratings.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Rows: 3180 Columns: 6
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr (4): brand, variety, style, country
+dbl (2): review_number, stars
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(ramen_ratings)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 3,180
+Columns: 6
+$ review_number &lt;dbl&gt; 3180, 3179, 3178, 3177, 3176, 3175, 3174, 3173, 3172, 31…
+$ brand         &lt;chr&gt; "Yum Yum", "Nagatanien", "Acecook", "Maison de Coree", "…
+$ variety       &lt;chr&gt; "Tem Tem Tom Yum Moo Deng", "tom Yum Kung Rice Vermicell…
+$ style         &lt;chr&gt; "Cup", "Pack", "Cup", "Cup", "Tray", "Cup", "Pack", "Pac…
+$ country       &lt;chr&gt; "Thailand", "Japan", "Japan", "France", "Japan", "Japan"…
+$ stars         &lt;dbl&gt; 3.75, 2.00, 2.50, 3.75, 5.00, 3.50, 3.75, 5.00, 3.50, 4.…</code></pre>
+</div>
 </div>
 
 
@@ -392,7 +544,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   for (var i=0; i<noterefs.length; i++) {
     const ref = noterefs[i];
     tippyHover(ref, function() {
-      let href = ref.getAttribute('href');
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);

@@ -18,25 +18,46 @@ library(tidyverse)
 
 -   Identify the source of the data.
 
+    -   This data set comes from Spotify via the spotifyr package.
+
 -   State when and how it was originally collected (by the original data curator, not necessarily how you found the data).
 
+    -   The data set was authored by Charlie Thompson, Josiah Parry, Donal Phipps, and Tom Wolff to make it easier to get data or general metadata on songs.
+
 -   Write a brief description of the observations.
+
+    -   This dataset contains about 5,000 songs from 6 main music categories (EDM, Latin, Pop, R&B, Rap, and Rock). For each song there contains general information such as the songs album, artist, release data, but also more interesting statistics on danceability, energy, and popularity.
 
 ## Research question
 
 -   A well formulated research question. (You may include more than one research question if you want to receive feedback on different ideas for your project. However, one per data set is required.)
 
+    -   Which combination of variables would be the best predictor of genre?
+
+    -   How does danceability affect popularity of songs of the Latin genre? How about for the Rap genre? Which genre does danceability matter the most when determining popularity?
+
 -   A description of the research topic along with a concise statement of your hypotheses on this topic.
 
+    -   Our hypothesis is that in the end there will need to be different variables used to calculate likelihood of genre's but for one general predictor I'd imagine that instrumentalness and danceability would be the best combination to determine.
+    -   For the second question, I believe that danceability will contribute a larger amount toward popularity for Latin music than Rap music. I also believe that danceability contributes the most to latin music overall.
+
 -   Identify the types of variables in your research question. Categorical? Quantitative?
+
+    -   There is categorical data that explains more general information about the song such as the album name, artist name, genre, but there is also a lot of quantitative data that measures features of the song like danceability, energy, and loudness.
 
 ## Literature
 
 -   Find one published credible article on the topic you are interested in researching.
 
+    -   https://www.analyticssteps.com/blogs/how-spotify-using-big-data
+
 -   Provide a one paragraph summary about the article.
 
+    -   This article provides insight into how Spotify uses its data to provide a better experience for its users. The three main ways Spotify uses data are to develop personalized content, digitize the user's taste, enhance marketing through targeted ads, continuously update its system, and create Spotify wrapped. Spotify has not claimed a spot in an incredibly competitive industry but has beaten impressive competitors such as Apple and Amazon due to its reliance on data to provide users with music and content they know they will enjoy.
+
 -   In 1-2 sentences, explain how your research question builds on / is different than the article you have cited.
+
+    -   Some of our research questions focus on how different factors affect popularity. This question is critical to consider because if we can adequately predict popularity, then, similar to Spotify, we may be able to predict which songs people will like as soon as they're released.
 
 ## Glimpse of data
 
