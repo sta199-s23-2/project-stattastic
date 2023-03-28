@@ -1,5 +1,5 @@
 ---
-title: "Project title"
+title: "Spotify, Sports, and Soup"
 subtitle: "Proposal"
 format: html
 editor: visual
@@ -82,25 +82,51 @@ glimpse(spotify_songs)
 
 -   Identify the source of the data.
 
+    -   The data comes from the College Sports Budget from Tidy Tuesday.
+
 -   State when and how it was originally collected (by the original data curator, not necessarily how you found the data).
 
+    -   The data was originally collected by the Equity in Athletics Data Analysis database and originally from this NPR article: https://www.npr.org/2021/10/27/1049530975/ncaa-spends-more-on-mens-sports-report-reveals
+
 -   Write a brief description of the observations.
+
+    -   The dataset looks at every collegiate sports program and their teams, including data for their men and women's teams. The observations are broken down by participation numbers for both men and female teams in each sport in the program, the division of the program (DI vs. DII vs. DIII), and the expenditure values of the womens vs. mens programs.
 
 ## Research question
 
 -   A well formulated research question. (You may include more than one research question if you want to receive feedback on different ideas for your project. However, one per data set is required.)
 
+    -   Are there expenditure inequities in college sports across divisions (I vs. II vs. III) and gender? Have these gender expenditure inequities been improving with time?
+
 -   A description of the research topic along with a concise statement of your hypotheses on this topic.
 
+    -   Yes, there are expenditure differences between divisions because what differentiates programs largely relates to the resources on the athletic department and school size (and therefore, money). When looking specifically at Division I sports programs, there are expenditure differences between men and women's teams, but they have been improving over the years based on societal changes.
+
 -   Identify the types of variables in your research question. Categorical? Quantitative?
+
+    -   Gender expenditures (men and female are different categories) = quantitative
+
+    -   Classification (division) = categorical
+
+    -   Totalexpenditure (for both men and women combined) = quantitative
+
+    -   Year = quantitative
+
+    -   Sport = categorical
 
 ## Literature
 
 -   Find one published credible article on the topic you are interested in researching.
 
+    -   <https://www.espn.com/college-sports/story/_/id/32481915/second-ncaa-gender-equity-report-shows-more-money-spent-male-athletes-female-ones>
+
 -   Provide a one paragraph summary about the article.
 
+    -   This article looks at the average money spent by the NCAA on men vs women. An NCAA gender equity report found that, on average, the NCAA spends more money on male athletes than female athletes. For example, looking at D1 and national championship participants (excluding basketball) in 2018-2019, money spent on female participants was on average \$1700 less than for male participants. The report also found that this gap is greater in the 6 single gender sports.  
+
 -   In 1-2 sentences, explain how your research question builds on / is different than the article you have cited.
+
+    -   Our research question will also analyze differences in gender equity in college sports, however we will also analyze how this difference has changed over time and how it differs betweent divisions. We will also look at equity differences between sports. 
 
 ## Glimpse of data
 
@@ -118,25 +144,43 @@ glimpse(sports)
 
 -   Identify the source of the data.
 
+The source of this data is from The Ramen Rater's Big List.
+
 -   State when and how it was originally collected (by the original data curator, not necessarily how you found the data).
 
+This data was created and collected by the founder of the Ramen Rater, Hiens Lienesch. He has been eating and reviewing different brands and flavors of Ramen since 2002. He has reviewed 4300 types of Ramen and created a dataset with their flavors, brands, and ratings. This dataset includes his findings up until 2020.
+
 -   Write a brief description of the observations.
+
+For each of his reviews, he includes the review number, brand of ramen, variety, style, country, and number of starts. There are many varieties offered by the same brand. He has rated the flavors from within each brand to create a comprehensive rating system.
 
 ## Research question
 
 -   A well formulated research question. (You may include more than one research question if you want to receive feedback on different ideas for your project. However, one per data set is required.)
 
+Are ratings of ramen different based on their style: Are cups, packs, boxes, or bowls rate higher overall? What brand of ramen has the highest rating? Do certain countries create ramen with higher ratings?
+
 -   A description of the research topic along with a concise statement of your hypotheses on this topic.
 
+This research topic is analyzing ramen preferences based on origin, style, and brand. We hypothesize that the ramen brands that originate from Japan will have higher ratings, because ramen is a traditional Japanese dish. Additionally, we hypothesize that bowls will have higher ratings, because their packaging is more consistent with a traditional serving style.
+
 -   Identify the types of variables in your research question. Categorical? Quantitative?
+
+There are multiple categorical variables: Brand, Variety, Style, Country. The quantitative variables are review number and stars.
 
 ## Literature
 
 -   Find one published credible article on the topic you are interested in researching.
 
+https://towardsdatascience.com/exploring-the-world-of-ramen-through-text-analytics-1131280c4c6b
+
 -   Provide a one paragraph summary about the article.
 
+This article analyzes the big list to discover what the most popular ramen themes are around the world. Specifically, it looks for the use of specific words within the names of popular ramen brands. Because this list includes ramen data from 38 countries, it is informative on what ramen names are used most frequently. The article's author found unigrams such as "noodles", "noodle", "flavour", "chicken", and "cup". They then found the frequency of these words within the dataset. Then they analyzed these words to see if they were logical in titles. Some frequently used words had to be modified for clarity, such as "tom" to "tom yum" a certain kind of soup. They then organized these themes by country and found that certain countries produce certain themes of ramen. The USA had a frequent use of chicken, soup, spicy. They then visualized these distributions through a map. This article analyzes the many ways you can modify and look at this unique dataset. The information extracted from the data helped inform their ramen purchases.
+
 -   In 1-2 sentences, explain how your research question builds on / is different than the article you have cited.
+
+Our research question analyzes which country has the highest rated ramen. This dataset looked into popular types of ramen by country, while ours will analyze which country produces the best Ramen.
 
 ## Glimpse of data
 
