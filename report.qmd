@@ -9,7 +9,7 @@ execute:
 
 ## Introduction and data
 
-Our research project will center around the spotifyr, an open source music dataset provided by Spotify. The dataset contains around 5,000 songs from six major music categories (EDM, Latin, Pop, R&B, Rap, and Rock). For each song there contains general information such as the songs album, artist, release data, but also more interesting statistics on danceability, energy, and popularity.
+Our research project will center around the spotifyr, an open source music dataset provided by Spotify. The dataset contains around 5,000 songs from six major music categories (EDM, Latin, Pop, R&B, Rap, and Rock). For each song there contains general information such as the songs album, artist, release data, but also more interesting statistics on danceability, energy, and popularity. The Spotify Web API was used to gain information about the songs. Spotify has twelve different features that are associated with songs. These are included within the dataset as variables.
 
 We considered different ethical questions surrounding data collection. Specifically, we explored how songs were chosen from Spotify and acquisition bias; however, do not believe there are significant ethical concerns related to this data and data collection.
 
