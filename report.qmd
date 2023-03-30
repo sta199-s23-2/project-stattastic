@@ -1,5 +1,5 @@
 ---
-title: "Project title"
+title: "Finding The Next Big Hit Through Danceability"
 subtitle: "Report"
 format: html
 editor: visual
