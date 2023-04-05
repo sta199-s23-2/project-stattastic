@@ -21,6 +21,8 @@ We hypothesize that there will be a positive correlation between danceability an
 
 We plan to answer this research question through a linear regression analysis looking at if the danceability of a song can be predictive for its popularity. This regression analysis will likely consider the energy and tempo variables in the regression analysis. This analysis will be faceted across genres as well.
 
+## Data
+
 ```{r}
 #| label: load-libraries
 #| message: false
@@ -35,4 +37,27 @@ library(tidyverse)
 #| warning: false
 
 spotify_songs <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-01-21/spotify_songs.csv')
+
+head(spotify_songs)
+```
+
+## Analysis
+
+```{r}
+#| label: popularity-vs-danceability-general
+
+spotify_songs |>
+  ggplot(
+    aes(
+      x = danceability,
+      y = track_popularity
+    )
+  ) +
+  geom_point(color = "steelblue") +
+  geom_smooth(se = FALSE) +
+  labs(
+    x = "Danceability Rating",
+    y = "Track Popularity Rating",
+    title = "How does danceability affect the popularity of a song?"
+  )
 ```
