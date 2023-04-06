@@ -31,6 +31,7 @@ Additionally, we will conduct a regression analysis to assess how other variable
 #| warning: false
 
 library(tidyverse)
+library(tidymodels)
 ```
 
 ```{r}
@@ -45,6 +46,8 @@ head(spotify_songs)
 
 ## Analysis
 
+First we will plot out general popularity of songs versus their adaptability score. This will allow us to visualize how dance-ability affects song's popularity overall in the data set.
+
 ```{r}
 #| label: popularity-vs-danceability-general
 
@@ -56,10 +59,84 @@ spotify_songs |>
     )
   ) +
   geom_point(color = "steelblue") +
-  geom_smooth(se = FALSE) +
+  geom_smooth(method = "lm", color = "black") +
   labs(
     x = "Danceability Rating",
     y = "Track Popularity Rating",
     title = "How does danceability affect the popularity of a song?"
   )
 ```
+
+From the above plot we see a very supbtle correlation between the dance ability rating and its popularity. However, with so many data points on this plot dance ability likely is not a great predictor for track popularity **generally**.
+
+Next, we'd like to see what this plot looks like if we facet it by the genre.
+
+```{r}
+#| label: popularity-vs-danceability-genre
+
+spotify_songs |>
+  ggplot(
+    aes(
+      x = danceability,
+      y = track_popularity
+    )
+  ) +
+  geom_point(color = "steelblue") +
+  geom_smooth(method = "lm", color = "black") +
+  facet_wrap(~playlist_genre) +
+  labs(
+    x = "Danceability Rating",
+    y = "Track Popularity Rating",
+    title = "Danceability vs popularity of songs in different genres"
+  )
+```
+
+Here we can see that there is certainly a difference in how dance-ability affects the popularity of a track depending on the songs genre. Our highest correlations found here are rap and pop while we even see a slightly decreasing slope for r&b. However, its worth noting that some genres tend to have a higher dance-ability score on average such as Latin and rap. While rock has a higher correlation than some other genres, on average its songs are less dance-able than the others.
+
+Now, we'd like to train a linear regression model to predict popularity using dance-ability. We'll train three separate models here.
+
+1.  A general model that can be used for any genre
+2.  A model that predicts how dance-ability affects the popularity of a song from the Latin genre.
+3.  A model that predicts how dance-ability affects the popularity of a song from the rap genre.
+
+```{r}
+#| label: linear-regression-models
+
+
+general_dance <- linear_reg() |>
+  set_engine("lm") |>
+  fit(track_popularity ~ danceability, data = spotify_songs) 
+
+latin_songs <- 
+  spotify_songs |>
+  filter(playlist_genre == "latin")
+
+latin_dance <- linear_reg() |>
+  set_engine("lm") |>
+  fit(track_popularity ~ danceability, data = latin_songs)
+
+rap_songs <- 
+  spotify_songs |>
+  filter(playlist_genre == "rap")
+
+rap_dance <- linear_reg() |>
+  set_engine("lm") |>
+  fit(track_popularity ~ danceability, data = rap_songs)
+
+general_dance |>
+  tidy()
+
+latin_dance |>
+  tidy()
+
+rap_dance |>
+  tidy()
+```
+
+$pop_{general} = 35.2 + 11.2 * danceability$
+
+$pop_{latin} = 40.7 + 8.8 * danceability$
+
+$pop_{rap} = 25.5 + 24.7 * danceability$
+
+\*\* Interpretation? \*\*
