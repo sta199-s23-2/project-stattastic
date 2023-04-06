@@ -141,3 +141,24 @@ $pop_{latin} = 40.7 + 8.8 * danceability$
 $pop_{rap} = 25.5 + 24.7 * danceability$
 
 \*\* Interpretation? \*\*
+
+Now we'd like to assess how well the regression model explains the observed data. We will do this by calculating adjusted R squared values.
+
+```{r}
+#| label: adjusted-R-squared
+general_dance |>
+  glance() |>
+  pull(adj.r.squared)
+
+latin_dance |>
+  glance() |>
+  pull(adj.r.squared)
+
+rap_dance |>
+  glance() |>
+  pull(adj.r.squared)
+
+
+```
+
+Based on the adjusted R squared values, danceability rating as an explanatory variable is not a good predictor of popularity rating in general and in the latin and rap genres. The adjusted R squared values between 0.14-4.2% reveals a very low variability in popularity is explained by the regression model.
