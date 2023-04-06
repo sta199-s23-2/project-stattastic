@@ -136,11 +136,21 @@ rap_dance |>
 
 $pop_{general} = 35.2 + 11.2 * danceability$
 
+For a 1 increase in danceability rating, there's an estimated mean change of a song's popularity rating (general song w/ no designated genre) by 11.2.
+
+When danceability is 0, there is an estimated mean popularity rating of 35.2.
+
 $pop_{latin} = 40.7 + 8.8 * danceability$
+
+For a 1 increase in danceability rating, there's an estimated mean change of a latin song's popularity rating by up by 8.8.
+
+When danceability is 0, there is an estimated mean popularity rating of 40.7.
 
 $pop_{rap} = 25.5 + 24.7 * danceability$
 
-\*\* Interpretation? \*\*
+For a 1 increase in danceability rating, there's an estimated mean change of a song's popularity rating by 11.2.
+
+When danceability is 0, there is an estimated mean popularity rating of 25.5.
 
 **Model Fit Assessments**
 
@@ -248,3 +258,5 @@ dance_int_tempo_energy |>
   glance() |>
   pull(AIC) 
 ```
+
+Given that the interaction model between danceability rating, tempo, and energy resulted in the lowest AIC value (303995.3), it is the best fit of the ones assessed at modeling popularity of a song.
