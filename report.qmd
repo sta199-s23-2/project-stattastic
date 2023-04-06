@@ -23,7 +23,7 @@ We plan to answer this research question through a linear regression analysis lo
 
 Additionally, we will conduct a regression analysis to assess how other variables influence the relationship between danceability and popularity. The approriate type of regression for our data would be a multiple linear regression that would take into consideration multiple explanatory variables to predict track popularity. The specific quantitative variables we want to consider are energy and tempo because of their relation to danceability in this regression analysis as similarly considered by a similar project by Ochi et al. (n.d.). We will assess these types of regressions with both additive and interaction models to see which type of model best fits the data. This relationship will also be analyzed for individual genres as well.
 
-**ROC CURVE + AUC + AIC**
+**(Adjusted) R2 + ROC CURVE + AUC + AIC**
 
 ## Data
 
