@@ -21,9 +21,9 @@ We hypothesize that there will be a positive correlation between danceability an
 
 We plan to answer this research question through a linear regression analysis looking at if the danceability of a song can be predictive for its popularity. First, we will look to see at the general relationship between danceability rating and track popularity rating of songs in the data. Then, we will look to into the level of this relationship in terms of different types of music by assessing genre as variable. In addition to these basic visualizations, we will also calculate a number of summary statistics that will further assist in other analyses and allow us to better understand the data. This includes calculation of the mean danceability rating and popularity ratings specifically to each genre.
 
-Additionally, we will conduct a regression analysis to assess how other variables influence the relationship between danceability and popularity. The approriate type of regression for our data would be a multiple linear regression that would take into consideration multiple explanatory variables to predict track popularity. The specific quantitative variables we want to consider are energy and tempo because of their relation to danceability in this regression analysis as similarly considered by a similar project by Ochi et al. (n.d.). We will assess these types of regressions with both additive and interaction models to see which type of model best fits the data. This relationship will also be analyzed for individual genres as well.
+Additionally, we will conduct a regression analysis to predict popularity on the basis of danceability ratings. This linear regression will have additional models looking specifically at Latin and Rap genres as well. There will also be a regression analysis conducted to assess how other variables related to a song influence the relationship between danceability and popularity. The approriate type of regression for this would be a multiple linear regression, taking into consideration multiple explanatory variables to predict track popularity. The specific quantitative variables we want to consider are energy and tempo because of their relation to danceability in this regression analysis as similarly considered by a similar project by Ochi et al. (n.d.). We will assess these types of regressions with both additive and interaction models to see which type of model best fits the data.
 
-**(Adjusted) R2 + ROC CURVE + AUC + AIC**
+To assess these models created, we will conduct calculations for adjusted R-squared and AIC.
 
 ## Data
 
@@ -142,10 +142,13 @@ $pop_{rap} = 25.5 + 24.7 * danceability$
 
 \*\* Interpretation? \*\*
 
+**Model Fit Assessments**
+
 Now we'd like to assess how well the regression model explains the observed data. We will do this by calculating adjusted R squared values.
 
 ```{r}
 #| label: adjusted-R-squared
+
 general_dance |>
   glance() |>
   pull(adj.r.squared)
@@ -157,8 +160,91 @@ latin_dance |>
 rap_dance |>
   glance() |>
   pull(adj.r.squared)
-
-
 ```
 
 Based on the adjusted R squared values, danceability rating as an explanatory variable is not a good predictor of popularity rating in general and in the latin and rap genres. The adjusted R squared values between 0.14-4.2% reveals a very low variability in popularity is explained by the regression model.
+
+Now we'd like to assess how well the regression model explains the observed data using AIC and an ROC curve.
+
+```{r}
+# | label: AIC-1
+
+general_dance |>
+  glance() |>
+  pull(AIC)
+
+latin_dance |>
+  glance() |>
+  pull(AIC)
+
+rap_dance |>
+  glance() |>
+  pull(AIC)
+```
+
+Based on AIC calculations, the general model was best fit because it had the lowest AIC value at 304371.9, where the latin model had an AIC of 47986.36 and rap model had an AIC of 52373.25. AIC selects a model with the least mean squared error, so a lower value is preferable.
+
+**Multiple Linear Regression Models**
+
+Now, we'd like to train multiple linear regression models to predict popularity using dance-ability, tempo, and energy. We'll train multiple separate models.
+
+1.  An additive model for danceability rating + tempo.
+2.  An additive model for danceability rating + energy.
+3.  An additive model for danceability rating + tempo + energy.
+4.  An interaction model for danceability rating \* tempo.
+5.  An interaction model for danceability rating \* energy.
+6.  An interaction model for danceability rating \* tempo \* energy.
+
+```{r}
+#| label: multiple-linear-regression
+
+#additive models
+
+dance_plus_tempo <- linear_reg() |>
+  set_engine("lm") |>
+  fit(track_popularity ~ danceability + tempo, data = spotify_songs) 
+dance_plus_tempo |>
+  glance() |>
+  pull(AIC)
+
+dance_plus_energy <- linear_reg() |>
+  set_engine("lm") |>
+  fit(track_popularity ~ danceability + energy, data = spotify_songs) 
+
+dance_plus_energy |>
+  glance() |>
+  pull(AIC)
+
+dance_plus_tempo_energy <- linear_reg() |>
+  set_engine("lm") |>
+  fit(track_popularity ~ danceability + tempo + energy, data = spotify_songs) 
+
+dance_plus_tempo_energy |>
+  glance() |>
+  pull(AIC) 
+
+#interactions
+
+dance_int_tempo <- linear_reg() |>
+  set_engine("lm") |>
+  fit(track_popularity ~ danceability * tempo, data = spotify_songs) 
+dance_int_tempo |>
+  glance() |>
+  pull(AIC)
+
+dance_int_energy <- linear_reg() |>
+  set_engine("lm") |>
+  fit(track_popularity ~ danceability * energy, data = spotify_songs) 
+
+dance_int_energy |>
+  glance() |>
+  pull(AIC)
+
+dance_int_tempo_energy <- linear_reg() |>
+  set_engine("lm") |>
+  fit(track_popularity ~ danceability * tempo * energy, data = spotify_songs) 
+
+dance_int_tempo_energy |>
+  glance() |>
+  pull(AIC) 
+```
