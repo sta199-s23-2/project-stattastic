@@ -54,7 +54,7 @@ spotify_songs <- readr::read_csv('https://raw.githubusercontent.com/rfordatascie
 head(spotify_songs)
 ```
 
-## Analysis (Results)
+## Results
 
 First we will plot out general popularity of songs versus their adaptability score. This will allow us to visualize how dance-ability affects song's popularity overall in the data set.
 
