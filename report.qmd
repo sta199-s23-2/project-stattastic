@@ -68,7 +68,7 @@ spotify_songs |>
       y = track_popularity
     )
   ) +
-  geom_point(color = "steelblue") +
+  geom_point(color = "steelblue", alpha = .5, size = .5) +
   geom_smooth(method = "lm", color = "black") +
   labs(
     x = "Danceability Rating",
@@ -91,7 +91,7 @@ spotify_songs |>
       y = track_popularity
     )
   ) +
-  geom_point(color = "steelblue") +
+  geom_point(color = "steelblue", size = .3) +
   geom_smooth(method = "lm", color = "black") +
   facet_wrap(~playlist_genre) +
   labs(
@@ -169,15 +169,17 @@ Now we'd like to assess how well the regression model explains the observed data
 
 general_dance |>
   glance() |>
-  pull(adj.r.squared)
+  pull(adj.r.squared) 
 
 latin_dance |>
   glance() |>
-  pull(adj.r.squared)
+  pull(adj.r.squared) 
 
 rap_dance |>
   glance() |>
-  pull(adj.r.squared)
+  pull(adj.r.squared) 
+
+
 ```
 
 Based on the adjusted R squared values, danceability rating as an explanatory variable is not a good predictor of popularity rating in general and in the latin and rap genres. The adjusted R squared values between 0.14-4.2% reveals a very low variability in popularity is explained by the regression model.
@@ -189,18 +191,22 @@ Now we'd like to assess how well the regression model explains the observed data
 
 general_dance |>
   glance() |>
-  pull(AIC)
+  pull(AIC) |>
+  tibble()
+
 
 latin_dance |>
   glance() |>
-  pull(AIC)
+  pull(AIC) |>
+  tibble()
 
 rap_dance |>
   glance() |>
-  pull(AIC)
+  pull(AIC) |>
+  tibble()
 ```
 
-Based on AIC calculations, the general model was best fit because it had the lowest AIC value at 304371.9, where the latin model had an AIC of 47986.36 and rap model had an AIC of 52373.25. AIC selects a model with the least mean squared error, so a lower value is preferable.
+Based on AIC calculations, the general model was best fit because it had the lowest AIC value at 304371.9, where the latin model had an AIC of 47986.36 and rap model had an AIC of 52373.25. AIC selects a model with the least mean squared error, so a lower value is preferable \^\[http://www.sthda.com/english/articles/38-regression-model-validation/158-regression-model-accuracy-metrics-r-square-aic-bic-cp-and-more/\].
 
 **Multiple Linear Regression Models**
 
@@ -268,3 +274,5 @@ dance_int_tempo_energy |>
 ```
 
 Given that the interaction model between danceability rating, tempo, and energy resulted in the lowest AIC value (303995.3), it is the best fit of the ones assessed at modeling popularity of a song.
+
+## Overall Results
