@@ -52,6 +52,8 @@ library(tidymodels)
 spotify_songs <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-01-21/spotify_songs.csv')
 
 head(spotify_songs)
+
+nrow(spotify_songs)
 ```
 
 ## Results and Analysis
@@ -60,12 +62,15 @@ First we will plot out general popularity of songs versus their adaptability sco
 
 ```{r}
 #| label: popularity-vs-danceability-general
+set.seed(33)
 
 spotify_songs |>
+  sample_n(size = 1500) |>
   ggplot(
     aes(
       x = danceability,
-      y = track_popularity
+      y = track_popularity,
+      color = playlist_genre
     )
   ) +
   geom_point(color = "steelblue", alpha = .5, size = .5) +
@@ -77,18 +82,21 @@ spotify_songs |>
   )
 ```
 
-From the above plot we see a very supbtle correlation between the dance ability rating and its popularity. However, with so many data points on this plot dance ability likely is not a great predictor for track popularity **generally**.
+From the above plot we see a very subtle correlation between the danceability rating and its popularity for this random sampling of 1000 songs. However, with so many data points on this plot danceability likely is not a great predictor for track popularity **generally**.
 
 Next, we'd like to see what this plot looks like if we facet it by the genre.
 
 ```{r}
 #| label: popularity-vs-danceability-genre
+set.seed(33)
 
-spotify_songs |>
+spotify_songs |> 
+  sample_n(size = 1500) |>
   ggplot(
     aes(
       x = danceability,
-      y = track_popularity
+      y = track_popularity,
+      color = playlist_genre
     )
   ) +
   geom_point(color = "steelblue", size = .3) +
@@ -97,7 +105,8 @@ spotify_songs |>
   labs(
     x = "Danceability Rating",
     y = "Track Popularity Rating",
-    title = "Danceability vs popularity of songs in different genres"
+    title = "Danceability vs popularity of songs in different genres", 
+    color = "Genre"
   )
 ```
 
