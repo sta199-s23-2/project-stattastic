@@ -99,7 +99,7 @@ spotify_songs |>
       color = playlist_genre
     )
   ) +
-  geom_point(color = "steelblue", size = .3) +
+  geom_point(size = .3) +
   geom_smooth(method = "lm", color = "black") +
   facet_wrap(~playlist_genre) +
   labs(
