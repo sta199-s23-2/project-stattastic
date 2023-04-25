@@ -4,10 +4,9 @@ format: html
 editor: visual
 ---
 
-This project was developed by **\[team name\]** For [STA 199: Introduction to Data Science](https://sta199-s23-2.github.io/) at Duke University. The team is comprised of the following team members.
+This project was developed by **Stattastic** For [STA 199: Introduction to Data Science](https://sta199-s23-2.github.io/) at Duke University. The team is comprised of the following team members.
 
--   Team member 1: One sentence description of Team member 1 (e.g., year, major, etc.).
--   Team member 2: One sentence description of Team member 2 (e.g., year, major, etc.).
--   Team member 3: One sentence description of Team member 3 (e.g., year, major, etc.).
--   Team member 4: One sentence description of Team member 4 (e.g., year, major, etc.).
--   ...
+-   Team member 1: Anna Seaman, Grad: May, 2025, Major: Health Policy and Management, Minor: Chemistry & Medicine Literature and Culture
+-   Team member 2: Jake Rosen, Grad: May, 2024, Major: Computer Science, Certificate: Innovation and Entrepreneurship
+-   Team member 3: Ariana Matarangas, Grad: May, 2025, Major: Neuroscience, Minor: Chemistry.
+-   Team member 4: Mikaela Lipp, Grad: May, 2025, Major: Neuroscience, Minor: Chemistry.
