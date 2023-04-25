@@ -31,7 +31,7 @@ We plan to answer this research question through a linear regression analysis lo
 
 Additionally, we will conduct a regression analysis to predict popularity on the basis of danceability ratings. This linear regression will have additional models looking specifically at Latin and Rap genres as well. There will also be a regression analysis conducted to assess how other variables related to a song influence the relationship between danceability and popularity. The approriate type of regression for this would be a multiple linear regression, taking into consideration multiple explanatory variables to predict track popularity. The specific quantitative variables we want to consider are energy and tempo because of their relation to danceability in this regression analysis as similarly considered by a similar project by Ochi et al. (n.d.). We will assess these types of regressions with both additive and interaction models to see which type of model best fits the data.
 
-To assess these models created, we will conduct calculations for adjusted R-squared and AIC. We used adjusted R-squared rather than r-squared because it takes into account the amount of variables that are being used. We were analyzing different variables in this dataset, so adjusted r-square was a better metric to use. These two metrics were used to determine the best fit model, specifically when using the many variables that we were assessing.
+We will conduct calculations for adjusted R-squared and AIC, in addition to mean squared error for the prediction models to confirm they are well fit. We used adjusted R-squared rather than r-squared because it takes into account the amount of variables that are being used. We were analyzing different variables in this dataset, so adjusted r-square was a better metric to use. These two metrics were used to determine the best fit model, specifically when using the many variables that we were assessing. To further assess these models created, we will split the data into training and testing data. All the models would be fitted to training data and then tested to predict popularity for on the testing data. We will calculate mean squared error for the prediction for the training and testing to determine if our models are fit at predicting for popularity on the respective explanatory variables. This MSE calculation would ensure that the results on model fitness to ensure that our model is not overfit. This will allow for adequate conclusions to be drawn from our model and subsequent usability of our models for predicting popularity of Spotify songs.
 
 ## Data
 
@@ -114,9 +114,9 @@ spotify_songs |>
 
 Here we can see that there is certainly a difference in how dance-ability affects the popularity of a track depending on the songs genre. Our highest correlations found here are rap and pop while we even see a slightly decreasing slope for r&b. However, its worth noting that some genres tend to have a higher dance-ability score on average such as Latin and rap. While rock has a higher correlation than some other genres, on average its songs are less dance-able than the others.
 
-**Linear Regression**
+### **Linear Regression**
 
-Now, we'd like to train a linear regression model to predict popularity using dance-ability. We'll train three separate models here.
+Now, we'd like to train a linear regression model to predict popularity using dance-ability. We'll train three separate models here before testing them on the testing data.
 
 1.  A general model that can be used for any genre.
 
@@ -190,6 +190,8 @@ When danceability is 0, there is an estimated mean popularity rating of 25.5.
 
 **Training Data Set**
 
+Calculations of mean squared error for the training data set from predictions.
+
 ```{r}
 #| label: prediction
 #General
@@ -210,6 +212,8 @@ mean((pop_pred_rap - rap_songs$track_popularity)^2)
 ```
 
 **Testing Data Set**
+
+Calculations of mean squared error for the training data set from predictions.
 
 ```{r}
 #| label: test_Dataset
@@ -242,6 +246,8 @@ mean((pop_pred_rap_test - rap_songs_test$track_popularity)^2)
 ```
 
 **MSE Table**
+
+Summary of the mean squared error results from both training and testing data models.
 
 ```{r}
 MSE_table <- data.frame(
@@ -283,9 +289,9 @@ rap_dance |>
 
 ```{r}
 adjusted_R2_table <- data.frame(
-  R2_general_dance = 0.00416193, 
-  R2_latin_dance = 0.001381617, 
-  R2_rap_dance = 0.02070946
+  R2_general_dance = 0.003989811, 
+  R2_latin_dance = 0.00103406, 
+  R2_rap_dance = 0.01922207
 )
 
 adjusted_R2_table |>
@@ -294,7 +300,7 @@ adjusted_R2_table |>
   knitr::kable()
 ```
 
-Based on the adjusted R squared values, danceability rating as an explanatory variable is not a good predictor of popularity rating in general and in the latin and rap genres. The adjusted R squared values between 0.14-4.2% reveals a very low variability in popularity is explained by the regression model.
+Based on the adjusted R squared values, danceability rating as an explanatory variable is not a good predictor of popularity rating in general and in the latin and rap genres. The adjusted R squared values between 0.10-4.0% reveals a very low variability in popularity is explained by the regression model. It's important to note that both the rap and dance models likely have fewer samples total than the general genre model and these can impact the adjusted r-squared results.
 
 Now we'd like to assess how well the regression model explains the observed data using AIC values.
 
@@ -319,9 +325,9 @@ rap_dance |>
 
 ```{r}
 LR_AIC_table <- data.frame(
-  AIC_general_dance = 304371.9, 
-  AIC_latin_dance = 47986.36,
-  AIC_rap_dance = 52373.25
+  AIC_general_dance = 243558, 
+  AIC_latin_dance = 38407,
+  AIC_rap_dance = 41963
 )
 
 LR_AIC_table |>
@@ -329,7 +335,9 @@ LR_AIC_table |>
   knitr::kable()
 ```
 
-Based on AIC calculations, the general model was best fit because it had the lowest AIC value at 304371.9, where the latin model had an AIC of 47986.36 and rap model had an AIC of 52373.25. AIC selects a model with the least mean squared error, so a lower value is preferable \^\[http://www.sthda.com/english/articles/38-regression-model-validation/158-regression-model-accuracy-metrics-r-square-aic-bic-cp-and-more/\].
+Based on AIC calculations, the latin dance model was best fit because it had the lowest AIC value at 38407, where the rap model had the second lowest AIC of 41963, and the general model had the highest AIC of 243558. AIC selects a model with the least mean squared error, so a lower value is preferable \^\[http://www.sthda.com/english/articles/38-regression-model-validation/158-regression-model-accuracy-metrics-r-square-aic-bic-cp-and-more/\]. It's important to note that both the rap and dance models likely have fewer samples total than the general genre model and these can impact the AIC results.
+
+Overall, based on the MSE
 
 **Multiple Linear Regression Models and Model Fit Assessments**
 
