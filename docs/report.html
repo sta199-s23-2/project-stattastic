@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Project title</title>
+<title>Just Dance(ability)</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -172,7 +172,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <li><a href="#methodology" id="toc-methodology" class="nav-link" data-scroll-target="#methodology">Methodology</a></li>
   <li><a href="#data" id="toc-data" class="nav-link" data-scroll-target="#data">Data</a></li>
   <li><a href="#results-and-analysis" id="toc-results-and-analysis" class="nav-link" data-scroll-target="#results-and-analysis">Results and Analysis</a></li>
-  <li><a href="#overall-results" id="toc-overall-results" class="nav-link" data-scroll-target="#overall-results">Overall Results</a></li>
+  <li><a href="#overall-results-next-steps-limitations-discussion" id="toc-overall-results-next-steps-limitations-discussion" class="nav-link" data-scroll-target="#overall-results-next-steps-limitations-discussion">Overall Results + Next Steps + Limitations (DISCUSSION)</a></li>
   </ul>
 </nav>
     </div>
@@ -181,7 +181,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Project title</h1>
+<h1 class="title">Just Dance(ability)</h1>
 <p class="subtitle lead">Report</p>
 </div>
 
@@ -213,7 +213,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2 class="anchored" data-anchor-id="methodology">Methodology</h2>
 <p>We plan to answer this research question through a linear regression analysis looking at if the danceability of a song can be predictive for its popularity. This regression analysis will likely consider the energy and tempo variables in the regression analysis. This analysis will be faceted across genres as well. First, we will look to see at the general relationship between danceability rating and track popularity rating of songs in the data. Then, we will look to into the level of this relationship in terms of different types of music by assessing genre as variable. In addition to these basic visualizations, we will also calculate a number of summary statistics that will further assist in other analyses and allow us to better understand the data. This includes calculation of the mean danceability rating and popularity ratings specifically to each genre.</p>
 <p>Additionally, we will conduct a regression analysis to predict popularity on the basis of danceability ratings. This linear regression will have additional models looking specifically at Latin and Rap genres as well. There will also be a regression analysis conducted to assess how other variables related to a song influence the relationship between danceability and popularity. The approriate type of regression for this would be a multiple linear regression, taking into consideration multiple explanatory variables to predict track popularity. The specific quantitative variables we want to consider are energy and tempo because of their relation to danceability in this regression analysis as similarly considered by a similar project by Ochi et al.&nbsp;(n.d.). We will assess these types of regressions with both additive and interaction models to see which type of model best fits the data.</p>
-<p>To assess these models created, we will conduct calculations for adjusted R-squared and AIC.</p>
+<p>To assess these models created, we will conduct calculations for adjusted R-squared and AIC. We used adjusted R-squared rather than r-squared because it takes into account the amount of variables that are being used. We were analyzing different variables in this dataset, so adjusted r-square was a better metric to use. These two metrics were used to determine the best fit model, specifically when using the many variables that we were assessing.</p>
 </section>
 <section id="data" class="level2">
 <h2 class="anchored" data-anchor-id="data">Data</h2>
@@ -538,7 +538,7 @@ $ AIC_rap_dance     &lt;dbl&gt; 52373.25</code></pre>
 <pre><code>[1] 303995.3</code></pre>
 </div>
 </div>
-<p>Given that the interaction model between danceability rating, tempo, and energy resulted in the lowest AIC value (303995.3), it is the best fit of the ones assessed at modeling popularity of a song.</p>
+<p>Given that the interaction model between danceability rating, tempo, and energy resulted in the lowest AIC value (303995.3), it is the best fit of the ones assessed at modeling popularity of a song. We excluded genre in the multiple-linear regression models, because we learned that genre did not have significant impacts on our previous predictive models. This caused us to shift our focus to other variables that could potentially impact our predicative models.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>MLR_AIC_table <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
 <span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">AIC_dance_plus_tempo =</span> <span class="fl">304372.5</span>, </span>
@@ -562,8 +562,8 @@ $ AIC_dance_int_tempo_energy  &lt;dbl&gt; 303995.3</code></pre>
 </div>
 </div>
 </section>
-<section id="overall-results" class="level2">
-<h2 class="anchored" data-anchor-id="overall-results">Overall Results</h2>
+<section id="overall-results-next-steps-limitations-discussion" class="level2">
+<h2 class="anchored" data-anchor-id="overall-results-next-steps-limitations-discussion">Overall Results + Next Steps + Limitations (DISCUSSION)</h2>
 
 
 </section>
