@@ -17,8 +17,6 @@ We considered different ethical questions surrounding data collection. Specifica
 
 We hypothesize that there will be a positive correlation between danceability and popularity, but that correlation will differ between genres. We expect the Latin genre to have the greatest correlation. Additionally, we hypothesize that the tempo and the energy of the song (when taken into consideration with the danceability rating) will better be able to predict track popularity rating.
 
-<<<<<<< HEAD
-We hypothesize that there will be a positive correlation between danceability and popularity, but that correlation will differ between genres. We expect the Latin genre to have the greatest correlation. 
 
 ## Methodology
 
