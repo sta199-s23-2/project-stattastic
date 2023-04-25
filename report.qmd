@@ -42,6 +42,8 @@ To assess these models created, we will conduct calculations for adjusted R-squa
 
 library(tidyverse)
 library(tidymodels)
+library(kableExtra)
+library(knitr)
 ```
 
 ```{r}
@@ -82,7 +84,7 @@ spotify_songs |>
   )
 ```
 
-From the above plot we see a very subtle correlation between the danceability rating and its popularity for this random sampling of 1000 songs. However, with so many data points on this plot danceability likely is not a great predictor for track popularity **generally**.
+From the above plot we see a very subtle correlation between the danceability rating and its popularity for this random sampling of 1000 songs. However, with so many data points on this plot danceability likely is not a great predictor for track popularity **generally**. There is no significant linear relationship between danceability and popularity.
 
 Next, we'd like to see what this plot looks like if we facet it by the genre.
 
@@ -115,18 +117,33 @@ Here we can see that there is certainly a difference in how dance-ability affect
 Now, we'd like to train a linear regression model to predict popularity using dance-ability. We'll train three separate models here.
 
 1.  A general model that can be used for any genre
+
 2.  A model that predicts how dance-ability affects the popularity of a song from the Latin genre.
-3.  A model that predicts how dance-ability affects the popularity of a song from the rap genre.
+
+3.  A model that predicts how dance-ability affects the popularity of a song from the rap genre
+
+    ```{r}
+    #| label: train-test-data
+
+    set.seed(33)
+
+    popularity_split <- initial_split(spotify_songs, prop = 0.80, strata = "playlist_genre")
+
+    train_data <- training(popularity_split)
+    test_data <- testing(popularity_split)
+
+    glimpse(test_data)
+    ```
 
 ```{r}
 #| label: linear-regression-models
 
 general_dance <- linear_reg() |>
   set_engine("lm") |>
-  fit(track_popularity ~ danceability, data = spotify_songs) 
+  fit(track_popularity ~ danceability, data = train_data) 
 
 latin_songs <- 
-  spotify_songs |>
+  train_data |>
   filter(playlist_genre == "latin")
 
 latin_dance <- linear_reg() |>
@@ -134,7 +151,7 @@ latin_dance <- linear_reg() |>
   fit(track_popularity ~ danceability, data = latin_songs)
 
 rap_songs <- 
-  spotify_songs |>
+  train_data |>
   filter(playlist_genre == "rap")
 
 rap_dance <- linear_reg() |>
@@ -151,23 +168,90 @@ rap_dance |>
   tidy()
 ```
 
-$pop_{general} = 35.2 + 11.2 * danceability$
+$pop_{general} = 35.3 + 10.9 * danceability$
 
-For a 1 increase in danceability rating, there's an estimated mean change of a song's popularity rating (general song w/ no designated genre) by 11.2.
+For a 1 increase in danceability rating, there's an estimated mean change of a song's popularity rating (general song w/ no designated genre) by 11.1.
 
 When danceability is 0, there is an estimated mean popularity rating of 35.2.
 
-$pop_{latin} = 40.7 + 8.8 * danceability$
+$pop_{latin} = 41.3 + 7.94 * danceability$
 
 For a 1 increase in danceability rating, there's an estimated mean change of a latin song's popularity rating by up by 8.8.
 
 When danceability is 0, there is an estimated mean popularity rating of 40.7.
 
-$pop_{rap} = 25.5 + 24.7 * danceability$
+$pop_{rap} = 35.3 + 10.9 * danceability$
 
 For a 1 increase in danceability rating, there's an estimated mean change of a song's popularity rating by 11.2.
 
 When danceability is 0, there is an estimated mean popularity rating of 25.5.
+
+**Training Data Set**
+
+```{r}
+#| label: prediction
+#General
+pop_pred_general <- predict(general_dance, train_data) |>
+  pull() 
+
+mean((pop_pred_general - train_data$track_popularity)^2)
+#Latin
+pop_pred_latin <- predict(latin_dance, latin_songs) |>
+  pull() 
+
+mean((pop_pred_latin - latin_songs$track_popularity)^2)
+#Rap
+pop_pred_rap <- predict(rap_dance, rap_songs) |>
+  pull() 
+
+mean((pop_pred_rap - rap_songs$track_popularity)^2)
+```
+
+**Testing Data Set**
+
+```{r}
+#| label: test_Dataset
+
+latin_songs_test <- 
+  test_data |>
+  filter(playlist_genre == "latin")
+
+rap_songs_test <- 
+  test_data |>
+  filter(playlist_genre == "rap")
+
+#General
+pop_pred_general_test <- predict(general_dance, test_data) |>
+  pull() 
+
+mean((pop_pred_general - test_data$track_popularity)^2)
+
+#Latin
+pop_pred_latin_test <- predict(latin_dance, latin_songs_test) |>
+  pull() 
+
+mean((pop_pred_latin_test - latin_songs_test$track_popularity)^2)
+#Rap
+pop_pred_rap_test <- predict(rap_dance, rap_songs_test) |>
+  pull() 
+
+mean((pop_pred_rap_test - rap_songs_test$track_popularity)^2)
+```
+
+**MSE Table**
+
+```{r}
+MSE_table <- data.frame(
+  general_dance_train = 623.7248, 
+  general_dance_test = 618.2059,
+  latin_dance_train = 647.9394, 
+  latin_dance_test = 634.6527,
+  rap_dance_train = 539.8089, 
+  rap_dance_test = 498.709
+)
+
+glimpse(MSE_table)
+```
 
 **Model Fit Assessments**
 
@@ -312,9 +396,13 @@ MLR_AIC_table <- data.frame(
   AIC_dance_int_tempo = 304374.2, 
   AIC_dance_int_energy = 304012.7, 
   AIC_dance_int_tempo_energy = 303995.3
-  )
+  ) 
 
-glimpse(MLR_AIC_table)
+
+
+MLR_AIC_table |>
+  pivot_longer(cols = names(MLR_AIC_table), names_to = "Models", values_to = "AIC" ) |>
+  knitr::kable()
 ```
 
 ## Overall Results + Next Steps + Limitations (DISCUSSION)
