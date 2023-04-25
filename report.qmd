@@ -31,7 +31,7 @@ We plan to answer this research question through a linear regression analysis lo
 
 Additionally, we will conduct a regression analysis to predict popularity on the basis of danceability ratings. This linear regression will have additional models looking specifically at Latin and Rap genres as well. There will also be a regression analysis conducted to assess how other variables related to a song influence the relationship between danceability and popularity. The approriate type of regression for this would be a multiple linear regression, taking into consideration multiple explanatory variables to predict track popularity. The specific quantitative variables we want to consider are energy and tempo because of their relation to danceability in this regression analysis as similarly considered by a similar project by Ochi et al. (n.d.). We will assess these types of regressions with both additive and interaction models to see which type of model best fits the data.
 
-To assess these models created, we will conduct calculations for adjusted R-squared and AIC.
+To assess these models created, we will conduct calculations for adjusted R-squared and AIC. We used adjusted R-squared rather than r-squared because it takes into account the amount of variables that are being used. We were analyzing different variables in this dataset, so adjusted r-square was a better metric to use. These two metrics were used to determine the best fit model, specifically when using the many variables that we were assessing.
 
 ## Data
 
@@ -302,7 +302,7 @@ dance_int_tempo_energy |>
   pull(AIC) 
 ```
 
-Given that the interaction model between danceability rating, tempo, and energy resulted in the lowest AIC value (303995.3), it is the best fit of the ones assessed at modeling popularity of a song.
+Given that the interaction model between danceability rating, tempo, and energy resulted in the lowest AIC value (303995.3), it is the best fit of the ones assessed at modeling popularity of a song. We excluded genre in the multiple-linear regression models, because we learned that genre did not have significant impacts on our previous predictive models. This caused us to shift our focus to other variables that could potentially impact our predicative models.
 
 ```{r}
 MLR_AIC_table <- data.frame(
@@ -317,4 +317,4 @@ MLR_AIC_table <- data.frame(
 glimpse(MLR_AIC_table)
 ```
 
-## Overall Results
+## Overall Results + Next Steps + Limitations
