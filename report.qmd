@@ -318,3 +318,19 @@ glimpse(MLR_AIC_table)
 ```
 
 ## Overall Results + Next Steps + Limitations (DISCUSSION)
+
+1.  Danceability is not a great predictor for popularity when **not** faceted by genre.
+
+2.  Danceability has different impacts on popularity when faceted by genre.
+
+3.  Danceability has a positive and significant effect on popularity ratings of general, latin, and rap songs. This relationship varies
+
+    1.  Rap has the highest coefficient
+
+    2.  General has the lowest
+
+4.  General model had best fit according to AIC criteria (lowest mean squared error)
+
+5.  The interactive model for danceability \* tempo \* energy has lowest AIC
+
+6.  The additive and interactive models that included the energy variable had lower AIC values
