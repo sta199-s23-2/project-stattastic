@@ -1,5 +1,5 @@
 ---
-title: "Project title"
+title: "Just Dance(ability)"
 subtitle: "Report"
 format: html
 editor: visual
@@ -17,13 +17,9 @@ We considered different ethical questions surrounding data collection. Specifica
 
 We hypothesize that there will be a positive correlation between danceability and popularity, but that correlation will differ between genres. We expect the Latin genre to have the greatest correlation. Additionally, we hypothesize that the tempo and the energy of the song (when taken into consideration with the danceability rating) will better be able to predict track popularity rating.
 
-## Methodology
-
-We plan to answer this research question through a linear regression analysis looking at if the danceability of a song can be predictive for its popularity. This regression analysis will likely consider the energy and tempo variables in the regression analysis. This analysis will be faceted across genres as well.
-
 ## Literature Review
 
-Our data set was originally found through the #tidytuesday project on GitHub. Kaylin Pavlik, a blogger, explored this dataset in various ways. She explored audio features by genre. She found that EDM tracks are the least likely to have acoustic features, but highly likely to have high energy with low valence. Additionally, through density/line plots, she found that danceability, tempo, valence, and energy had the largest differences by genre. We are building on her research by specifically analyzing the differences between danceability by genre. Our research question digs deeper into this question. Additionally, she found that Latin music was very danceable, while rock music had very little danceability. We will continue to look into the specifics of these differences through linear regression models \^\[https://www.kaylinpavlik.com/classifying-songs-genres/\].
+Our data set was originally found through the #tidytuesday project on GitHub. Kaylin Pavlik, a blogger, explored this dataset in various ways. She explored audio features by genre. She found that EDM tracks are the least likely to have acoustic features, but highly likely to have high energy with low valence. Additionally, through density/line plots, she found that danceability, tempo, valence, and energy had the largest differences by genre. We are building on her research by specifically analyzing the differences between danceability by genre. Our research question digs deeper into this question. Additionally, she found that Latin music was very danceable, while rock music had very little danceability. We will continue to look into the specifics of these differences through linear regression models \^\[https://www.kaylinpavlik.com/classifying-songs-genres\].
 
 Amri Rohman also analyzed this dataset \^\[https://rpubs.com/amrirohman/spotify-song\]. She specifically looked at songs and their popularity. In 2020 she found that the most popular Spotify song was Dance Monkey. She also looked at the differences in tempo for each genre, faceted by different eras of music. She found that rap songs in the 2000s had slower tempos. We are going to build on these research questions by looking at the popularity of songs by genre faceted by dancability. We are both analyzing how different song features vary across genres.
 
@@ -31,7 +27,7 @@ Although other groups/people have looked into the same Spotifyr datset from tidy
 
 ## Methodology
 
-We plan to answer this research question through a linear regression analysis looking at if the danceability of a song can be predictive for its popularity. First, we will look to see at the general relationship between danceability rating and track popularity rating of songs in the data. Then, we will look to into the level of this relationship in terms of different types of music by assessing genre as variable. In addition to these basic visualizations, we will also calculate a number of summary statistics that will further assist in other analyses and allow us to better understand the data. This includes calculation of the mean danceability rating and popularity ratings specifically to each genre.
+We plan to answer this research question through a linear regression analysis looking at if the danceability of a song can be predictive for its popularity. This regression analysis will likely consider the energy and tempo variables in the regression analysis. This analysis will be faceted across genres as well. First, we will look to see at the general relationship between danceability rating and track popularity rating of songs in the data. Then, we will look to into the level of this relationship in terms of different types of music by assessing genre as variable. In addition to these basic visualizations, we will also calculate a number of summary statistics that will further assist in other analyses and allow us to better understand the data. This includes calculation of the mean danceability rating and popularity ratings specifically to each genre.
 
 Additionally, we will conduct a regression analysis to predict popularity on the basis of danceability ratings. This linear regression will have additional models looking specifically at Latin and Rap genres as well. There will also be a regression analysis conducted to assess how other variables related to a song influence the relationship between danceability and popularity. The approriate type of regression for this would be a multiple linear regression, taking into consideration multiple explanatory variables to predict track popularity. The specific quantitative variables we want to consider are energy and tempo because of their relation to danceability in this regression analysis as similarly considered by a similar project by Ochi et al. (n.d.). We will assess these types of regressions with both additive and interaction models to see which type of model best fits the data.
 
