@@ -196,6 +196,16 @@ rap_dance |>
 
 ```
 
+```{r}
+adjusted_R2_table <- data.frame(
+  R2_general_dance = 0.00416193, 
+  R2_latin_dance = 0.001381617, 
+  R2_rap_dance = 0.02070946
+)
+
+glimpse(adjusted_R2_table)
+```
+
 Based on the adjusted R squared values, danceability rating as an explanatory variable is not a good predictor of popularity rating in general and in the latin and rap genres. The adjusted R squared values between 0.14-4.2% reveals a very low variability in popularity is explained by the regression model.
 
 Now we'd like to assess how well the regression model explains the observed data using AIC and an ROC curve.
@@ -218,6 +228,16 @@ rap_dance |>
   glance() |>
   pull(AIC) |>
   tibble()
+```
+
+```{r}
+LR_AIC_table <- data.frame(
+  AIC_general_dance = 304371.9, 
+  AIC_latin_dance = 47986.36,
+  AIC_rap_dance = 52373.25
+)
+
+glimpse(LR_AIC_table)
 ```
 
 Based on AIC calculations, the general model was best fit because it had the lowest AIC value at 304371.9, where the latin model had an AIC of 47986.36 and rap model had an AIC of 52373.25. AIC selects a model with the least mean squared error, so a lower value is preferable \^\[http://www.sthda.com/english/articles/38-regression-model-validation/158-regression-model-accuracy-metrics-r-square-aic-bic-cp-and-more/\].
@@ -288,5 +308,18 @@ dance_int_tempo_energy |>
 ```
 
 Given that the interaction model between danceability rating, tempo, and energy resulted in the lowest AIC value (303995.3), it is the best fit of the ones assessed at modeling popularity of a song.
+
+```{r}
+MLR_AIC_table <- data.frame(
+  AIC_dance_plus_tempo = 304372.5, 
+  AIC_dance_plus_energy = 304015.9, 
+  AIC_dance_plus_tempo_energy = 304003.1,
+  AIC_dance_int_tempo = 304374.2, 
+  AIC_dance_int_energy = 304012.7, 
+  AIC_dance_int_tempo_energy = 303995.3
+  )
+
+glimpse(MLR_AIC_table)
+```
 
 ## Overall Results
