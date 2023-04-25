@@ -114,13 +114,15 @@ spotify_songs |>
 
 Here we can see that there is certainly a difference in how dance-ability affects the popularity of a track depending on the songs genre. Our highest correlations found here are rap and pop while we even see a slightly decreasing slope for r&b. However, its worth noting that some genres tend to have a higher dance-ability score on average such as Latin and rap. While rock has a higher correlation than some other genres, on average its songs are less dance-able than the others.
 
+**Linear Regression**
+
 Now, we'd like to train a linear regression model to predict popularity using dance-ability. We'll train three separate models here.
 
-1.  A general model that can be used for any genre
+1.  A general model that can be used for any genre.
 
 2.  A model that predicts how dance-ability affects the popularity of a song from the Latin genre.
 
-3.  A model that predicts how dance-ability affects the popularity of a song from the rap genre
+3.  A model that predicts how dance-ability affects the popularity of a song from the rap genre.
 
     ```{r}
     #| label: train-test-data
@@ -231,6 +233,7 @@ pop_pred_latin_test <- predict(latin_dance, latin_songs_test) |>
   pull() 
 
 mean((pop_pred_latin_test - latin_songs_test$track_popularity)^2)
+
 #Rap
 pop_pred_rap_test <- predict(rap_dance, rap_songs_test) |>
   pull() 
@@ -256,7 +259,7 @@ MSE_table |>
   knitr::kable()
 ```
 
-**Model Fit Assessments**
+**Linear Regression Model Fit Assessments**
 
 Now we'd like to assess how well the regression model explains the observed data. We will do this by calculating adjusted R squared values.
 
@@ -293,7 +296,7 @@ adjusted_R2_table |>
 
 Based on the adjusted R squared values, danceability rating as an explanatory variable is not a good predictor of popularity rating in general and in the latin and rap genres. The adjusted R squared values between 0.14-4.2% reveals a very low variability in popularity is explained by the regression model.
 
-Now we'd like to assess how well the regression model explains the observed data using AIC and an ROC curve.
+Now we'd like to assess how well the regression model explains the observed data using AIC values.
 
 ```{r}
 # | label: AIC-1
@@ -302,7 +305,6 @@ general_dance |>
   glance() |>
   pull(AIC) |>
   tibble()
-
 
 latin_dance |>
   glance() |>
@@ -329,7 +331,7 @@ LR_AIC_table |>
 
 Based on AIC calculations, the general model was best fit because it had the lowest AIC value at 304371.9, where the latin model had an AIC of 47986.36 and rap model had an AIC of 52373.25. AIC selects a model with the least mean squared error, so a lower value is preferable \^\[http://www.sthda.com/english/articles/38-regression-model-validation/158-regression-model-accuracy-metrics-r-square-aic-bic-cp-and-more/\].
 
-**Multiple Linear Regression Models (Training/Testing)**
+**Multiple Linear Regression Models and Model Fit Assessments**
 
 Now, we'd like to train multiple linear regression models to predict popularity using dance-ability, tempo, and energy. We'll train multiple separate models.
 
@@ -410,9 +412,8 @@ MLR_AIC_table <- data.frame(
   AIC_dance_int_energy_train = 243268.6,
   AIC_dance_int_energy_test = 60748.93,
   AIC_dance_int_tempo_energy_train = 243257.6,
-  AIC_dance_int_tempo_energy_train = 60744.13
+  AIC_dance_int_tempo_energy_test = 60744.13
   ) 
-
 
 
 MLR_AIC_table |>
@@ -477,6 +478,8 @@ dance_int_tempo_energy_test |>
 ```
 
 ```{r}
+#| label: MSE-calcs
+
 mult_lin_test_6 <- predict(dance_int_tempo_energy_test, test_data) |>
   pull() 
 
@@ -486,6 +489,20 @@ mult_lin_train_6 <- predict(dance_int_tempo_energy, train_data) |>
   pull() 
 
 mean((mult_lin_test_6 - train_data$track_popularity)^2)
+```
+
+```{r}
+#| label: MSE-table-MLR
+
+MSE_table <- data.frame(general_dance_train = 623.7248, 
+  dance_int_tempo_energy_train = 636.1877,
+  dance_int_tempo_energy_test = 604.9009)
+
+MSE_table |>
+  pivot_longer(cols = names(MSE_table), names_to = "Interaction Model", 
+               values_to = "MSE" ) |>
+  knitr::kable()
+
 ```
 
 ## Overall Results + Next Steps + Limitations (DISCUSSION)
