@@ -250,7 +250,10 @@ MSE_table <- data.frame(
   rap_dance_test = 498.709
 )
 
-glimpse(MSE_table)
+MSE_table |>
+  pivot_longer(cols = names(MSE_table), names_to = "Linear Regression Models", 
+               values_to = "MSE" ) |>
+  knitr::kable()
 ```
 
 **Model Fit Assessments**
@@ -282,7 +285,10 @@ adjusted_R2_table <- data.frame(
   R2_rap_dance = 0.02070946
 )
 
-glimpse(adjusted_R2_table)
+adjusted_R2_table |>
+  pivot_longer(cols = names(adjusted_R2_table), names_to = "Models", 
+               values_to = "R Squared" ) |>
+  knitr::kable()
 ```
 
 Based on the adjusted R squared values, danceability rating as an explanatory variable is not a good predictor of popularity rating in general and in the latin and rap genres. The adjusted R squared values between 0.14-4.2% reveals a very low variability in popularity is explained by the regression model.
@@ -316,12 +322,14 @@ LR_AIC_table <- data.frame(
   AIC_rap_dance = 52373.25
 )
 
-glimpse(LR_AIC_table)
+LR_AIC_table |>
+  pivot_longer(cols = names(LR_AIC_table), names_to = "Models", values_to = "AIC" ) |>
+  knitr::kable()
 ```
 
 Based on AIC calculations, the general model was best fit because it had the lowest AIC value at 304371.9, where the latin model had an AIC of 47986.36 and rap model had an AIC of 52373.25. AIC selects a model with the least mean squared error, so a lower value is preferable \^\[http://www.sthda.com/english/articles/38-regression-model-validation/158-regression-model-accuracy-metrics-r-square-aic-bic-cp-and-more/\].
 
-**Multiple Linear Regression Models**
+**Multiple Linear Regression Models (Training/Testing)**
 
 Now, we'd like to train multiple linear regression models to predict popularity using dance-ability, tempo, and energy. We'll train multiple separate models.
 
@@ -333,20 +341,21 @@ Now, we'd like to train multiple linear regression models to predict popularity 
 6.  An interaction model for danceability rating \* tempo \* energy.
 
 ```{r}
-#| label: multiple-linear-regression
+#| label: multiple-linear-regression-train
 
 #additive models
 
 dance_plus_tempo <- linear_reg() |>
   set_engine("lm") |>
-  fit(track_popularity ~ danceability + tempo, data = spotify_songs) 
+  fit(track_popularity ~ danceability + tempo, data = train_data) 
+
 dance_plus_tempo |>
   glance() |>
   pull(AIC)
 
 dance_plus_energy <- linear_reg() |>
   set_engine("lm") |>
-  fit(track_popularity ~ danceability + energy, data = spotify_songs) 
+  fit(track_popularity ~ danceability + energy, data = train_data) 
 
 dance_plus_energy |>
   glance() |>
@@ -354,7 +363,7 @@ dance_plus_energy |>
 
 dance_plus_tempo_energy <- linear_reg() |>
   set_engine("lm") |>
-  fit(track_popularity ~ danceability + tempo + energy, data = spotify_songs) 
+  fit(track_popularity ~ danceability + tempo + energy, data = train_data) 
 
 dance_plus_tempo_energy |>
   glance() |>
@@ -364,14 +373,14 @@ dance_plus_tempo_energy |>
 
 dance_int_tempo <- linear_reg() |>
   set_engine("lm") |>
-  fit(track_popularity ~ danceability * tempo, data = spotify_songs) 
+  fit(track_popularity ~ danceability * tempo, data = train_data) 
 dance_int_tempo |>
   glance() |>
   pull(AIC)
 
 dance_int_energy <- linear_reg() |>
   set_engine("lm") |>
-  fit(track_popularity ~ danceability * energy, data = spotify_songs) 
+  fit(track_popularity ~ danceability * energy, data = train_data) 
 
 dance_int_energy |>
   glance() |>
@@ -379,7 +388,7 @@ dance_int_energy |>
 
 dance_int_tempo_energy <- linear_reg() |>
   set_engine("lm") |>
-  fit(track_popularity ~ danceability * tempo * energy, data = spotify_songs) 
+  fit(track_popularity ~ danceability * tempo * energy, data = train_data) 
 
 dance_int_tempo_energy |>
   glance() |>
@@ -390,12 +399,18 @@ Given that the interaction model between danceability rating, tempo, and energy 
 
 ```{r}
 MLR_AIC_table <- data.frame(
-  AIC_dance_plus_tempo = 304372.5, 
-  AIC_dance_plus_energy = 304015.9, 
-  AIC_dance_plus_tempo_energy = 304003.1,
-  AIC_dance_int_tempo = 304374.2, 
-  AIC_dance_int_energy = 304012.7, 
-  AIC_dance_int_tempo_energy = 303995.3
+  AIC_dance_plus_tempo_train = 243559.2,
+  AIC_dance_plus_tempo_test = 60820.16,
+  AIC_dance_plus_energy_train = 243268,
+  AIC_dance_plus_energy_test =  60754.63,
+  AIC_dance_plus_tempo_energy_train = 243258.8,
+  AIC_dance_plus_tempo_energy_test = 60752.95,
+  AIC_dance_int_tempo_train = 243561.1,
+  AIC_dance_int_tempo_test =  60822.01,
+  AIC_dance_int_energy_train = 243268.6,
+  AIC_dance_int_energy_test = 60748.93,
+  AIC_dance_int_tempo_energy_train = 243257.6,
+  AIC_dance_int_tempo_energy_train = 60744.13
   ) 
 
 
@@ -403,6 +418,74 @@ MLR_AIC_table <- data.frame(
 MLR_AIC_table |>
   pivot_longer(cols = names(MLR_AIC_table), names_to = "Models", values_to = "AIC" ) |>
   knitr::kable()
+```
+
+```{r}
+#| label: multiple-linear-regression-test
+
+#additive models
+
+dance_plus_tempo_test <- linear_reg() |>
+  set_engine("lm") |>
+  fit(track_popularity ~ danceability + tempo, data = test_data) 
+
+dance_plus_tempo_test |>
+  glance() |>
+  pull(AIC)
+
+dance_plus_energy_test <- linear_reg() |>
+  set_engine("lm") |>
+  fit(track_popularity ~ danceability + energy, data = test_data) 
+
+dance_plus_energy_test |>
+  glance() |>
+  pull(AIC)
+
+dance_plus_tempo_energy_test <- linear_reg() |>
+  set_engine("lm") |>
+  fit(track_popularity ~ danceability + tempo + energy, data = test_data) 
+
+dance_plus_tempo_energy_test |>
+  glance() |>
+  pull(AIC) 
+
+#interactions
+
+dance_int_tempo_test <- linear_reg() |>
+  set_engine("lm") |>
+  fit(track_popularity ~ danceability * tempo, data = test_data) 
+
+dance_int_tempo_test |>
+  glance() |>
+  pull(AIC)
+
+dance_int_energy_test <- linear_reg() |>
+  set_engine("lm") |>
+  fit(track_popularity ~ danceability * energy, data = test_data) 
+
+dance_int_energy_test |>
+  glance() |>
+  pull(AIC)
+
+dance_int_tempo_energy_test <- linear_reg() |>
+  set_engine("lm") |>
+  fit(track_popularity ~ danceability * tempo * energy, data = test_data) 
+
+dance_int_tempo_energy_test |>
+  glance() |>
+  pull(AIC) 
+```
+
+```{r}
+mult_lin_test_6 <- predict(dance_int_tempo_energy_test, test_data) |>
+  pull() 
+
+mean((mult_lin_test_6 - test_data$track_popularity)^2)
+
+mult_lin_train_6 <- predict(dance_int_tempo_energy, train_data) |>
+  pull() 
+
+mean((mult_lin_test_6 - train_data$track_popularity)^2)
 ```
 
 ## Overall Results + Next Steps + Limitations (DISCUSSION)
