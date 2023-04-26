@@ -31,7 +31,7 @@ We plan to answer this research question through a linear regression analysis lo
 
 Additionally, we will conduct a regression analysis to predict popularity on the basis of danceability ratings. This linear regression will have additional models looking specifically at Latin and Rap genres as well. There will also be a regression analysis conducted to assess how other variables related to a song influence the relationship between danceability and popularity. The approriate type of regression for this would be a multiple linear regression, taking into consideration multiple explanatory variables to predict track popularity. The specific quantitative variables we want to consider are energy and tempo because of their relation to danceability in this regression analysis as similarly considered by a similar project by Ochi et al. (n.d.). We will assess these types of regressions with both additive and interaction models to see which type of model best fits the data.
 
-We will conduct calculations for adjusted R-squared and AIC, in addition to mean squared error for the prediction models to confirm they are well fit. We used adjusted R-squared rather than r-squared because it takes into account the amount of variables that are being used. We were analyzing different variables in this dataset, so adjusted r-square was a better metric to use. These two metrics were used to determine the best fit model, specifically when using the many variables that we were assessing. To further assess these models created, we will split the data into training and testing data. All the models would be fitted to training data and then tested to predict popularity for on the testing data. We will calculate mean squared error for the prediction for the training and testing to determine if our models are fit at predicting for popularity on the respective explanatory variables. This MSE calculation would ensure that the results on model fitness to ensure that our model is not overfit. This will allow for adequate conclusions to be drawn from our model and subsequent usability of our models for predicting popularity of Spotify songs.
+We will conduct calculations for adjusted R-squared for the linear regression and AIC for both types of regression models, in addition to mean squared error for the prediction models to confirm they are well fit. We used adjusted R-squared rather than r-squared because it takes into account the amount of variables that are being used. We were analyzing different variables in this dataset, so adjusted r-square was a better metric to use. These two metrics were used to determine the best fit model, specifically when using the many variables that we were assessing. To further assess these models created, we will split the data into training and testing data. All the models would be fitted to training data and then tested to predict popularity for on the testing data. We will calculate mean squared error for the prediction for the training and testing to determine if our models are fit at predicting for popularity on the respective explanatory variables. This MSE calculation would ensure that the results on model fitness to ensure that our model is not overfit. This will allow for adequate conclusions to be drawn from our model and subsequent usability of our models for predicting popularity of Spotify songs.
 
 ## Data
 
@@ -283,8 +283,6 @@ latin_dance |>
 rap_dance |>
   glance() |>
   pull(adj.r.squared) 
-
-
 ```
 
 ```{r}
@@ -335,9 +333,9 @@ LR_AIC_table |>
   knitr::kable()
 ```
 
-Based on AIC calculations, the latin dance model was best fit because it had the lowest AIC value at 38407, where the rap model had the second lowest AIC of 41963, and the general model had the highest AIC of 243558. AIC selects a model with the least mean squared error, so a lower value is preferable \^\[http://www.sthda.com/english/articles/38-regression-model-validation/158-regression-model-accuracy-metrics-r-square-aic-bic-cp-and-more/\]. It's important to note that both the rap and dance models likely have fewer samples total than the general genre model and these can impact the AIC results.
+Based on AIC calculations, the latin dance model was best fit because it had the lowest AIC value at 38407, where the rap model had the second lowest AIC of 41963, and the general model had the highest AIC of 243558. AIC selects a model with the least mean squared error, so a lower value is preferable \[http://www.sthda.com/english/articles/38-regression-model-validation/158-regression-model-accuracy-metrics-r-square-aic-bic-cp-and-more/\]. It's important to note that both the rap and dance models likely have fewer samples total than the general genre model and these can impact the AIC results.
 
-Overall, based on the MSE
+This results are important given the MSE results showing that all the models were fit for both training and testing data. There were no major differences between the MSE for the models on the training and testing data. This shows that our models were not overfit - the models and their explanatory variables worked well at predicting popularity for both the trained data and on new data (testing data).
 
 **Multiple Linear Regression Models and Model Fit Assessments**
 
@@ -405,30 +403,6 @@ dance_int_tempo_energy |>
   pull(AIC) 
 ```
 
-Given that the interaction model between danceability rating, tempo, and energy resulted in the lowest AIC value (303995.3), it is the best fit of the ones assessed at modeling popularity of a song. We excluded genre in the multiple-linear regression models, because we learned that genre did not have significant impacts on our previous predictive models. This caused us to shift our focus to other variables that could potentially impact our predicative models.
-
-```{r}
-MLR_AIC_table <- data.frame(
-  AIC_dance_plus_tempo_train = 243559.2,
-  AIC_dance_plus_tempo_test = 60820.16,
-  AIC_dance_plus_energy_train = 243268,
-  AIC_dance_plus_energy_test =  60754.63,
-  AIC_dance_plus_tempo_energy_train = 243258.8,
-  AIC_dance_plus_tempo_energy_test = 60752.95,
-  AIC_dance_int_tempo_train = 243561.1,
-  AIC_dance_int_tempo_test =  60822.01,
-  AIC_dance_int_energy_train = 243268.6,
-  AIC_dance_int_energy_test = 60748.93,
-  AIC_dance_int_tempo_energy_train = 243257.6,
-  AIC_dance_int_tempo_energy_test = 60744.13
-  ) 
-
-
-MLR_AIC_table |>
-  pivot_longer(cols = names(MLR_AIC_table), names_to = "Models", values_to = "AIC" ) |>
-  knitr::kable()
-```
-
 ```{r}
 #| label: multiple-linear-regression-test
 
@@ -486,6 +460,31 @@ dance_int_tempo_energy_test |>
 ```
 
 ```{r}
+#| label: AIC-table
+
+MLR_AIC_table <- data.frame(
+  AIC_dance_plus_tempo_train = 243559.2,
+  AIC_dance_plus_tempo_test = 60820.16,
+  AIC_dance_plus_energy_train = 243268,
+  AIC_dance_plus_energy_test =  60754.63,
+  AIC_dance_plus_tempo_energy_train = 243258.8,
+  AIC_dance_plus_tempo_energy_test = 60752.95,
+  AIC_dance_int_tempo_train = 243561.1,
+  AIC_dance_int_tempo_test =  60822.01,
+  AIC_dance_int_energy_train = 243268.6,
+  AIC_dance_int_energy_test = 60748.93,
+  AIC_dance_int_tempo_energy_train = 243257.6,
+  AIC_dance_int_tempo_energy_test = 60744.13
+  ) 
+
+MLR_AIC_table |>
+  pivot_longer(cols = names(MLR_AIC_table), names_to = "Models", values_to = "AIC" ) |>
+  knitr::kable()
+```
+
+Given that the interaction model between danceability rating, tempo, and energy resulted in the lowest AIC value (testing data = 60744.13; training data = 243257.6), it is the best fit of the ones assessed at modeling popularity of a song. However, there are very small differences for the AIC results across all the models. We excluded genre in the multiple-linear regression models, because we learned that genre did not have significant impacts on our previous predictive models. This caused us to shift our focus to other variables that could potentially impact our predicative models.
+
+```{r}
 #| label: MSE-calcs
 
 mult_lin_test_6 <- predict(dance_int_tempo_energy_test, test_data) |>
@@ -512,6 +511,8 @@ MSE_table |>
   knitr::kable()
 
 ```
+
+This results are important given the MSE results showing that all the models were fit for both training and testing data. Given that the interaction model between danceability, tempo, and energy had the lowest AIC value, this was the model chosen to conduct predictions from the training-testing data with MSE calculations. There were no major difference between the MSE for the models on the training and testing data. This shows that our were not overfit - the models and their explanatory variables worked well at predicting popularity for both the trained data and on new data (testing data).
 
 ## Overall Results + Next Steps + Limitations (DISCUSSION)
 
