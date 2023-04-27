@@ -172,21 +172,21 @@ rap_dance |>
 
 $pop_{general} = 35.3 + 10.9 * danceability$
 
-For a 1 increase in danceability rating, there's an estimated mean change of a song's popularity rating (general song w/ no designated genre) by 11.1.
+For a 1 increase in danceability rating, there's an estimated mean change of a song's popularity rating (general song w/ no designated genre) by 10.9.
 
-When danceability is 0, there is an estimated mean popularity rating of 35.2.
+When danceability is 0, there is an estimated mean popularity rating of 35.3.
 
 $pop_{latin} = 41.3 + 7.94 * danceability$
 
-For a 1 increase in danceability rating, there's an estimated mean change of a latin song's popularity rating by up by 8.8.
+For a 1 increase in danceability rating, there's an estimated mean change of a latin song's popularity rating by up by 7.94.
 
 When danceability is 0, there is an estimated mean popularity rating of 40.7.
 
-$pop_{rap} = 35.3 + 10.9 * danceability$
+$pop_{rap} = 25.9 + 23.9 * danceability$
 
-For a 1 increase in danceability rating, there's an estimated mean change of a song's popularity rating by 11.2.
+For a 1 increase in danceability rating, there's an estimated mean change of a song's popularity rating by 23.9.
 
-When danceability is 0, there is an estimated mean popularity rating of 25.5.
+When danceability is 0, there is an estimated mean popularity rating of 25.9.
 
 **Training Data Set**
 
@@ -514,20 +514,41 @@ MSE_table |>
 
 This results are important given the MSE results showing that all the models were fit for both training and testing data. Given that the interaction model between danceability, tempo, and energy had the lowest AIC value, this was the model chosen to conduct predictions from the training-testing data with MSE calculations. There were no major difference between the MSE for the models on the training and testing data. This shows that our were not overfit - the models and their explanatory variables worked well at predicting popularity for both the trained data and on new data (testing data).
 
-## Overall Results + Next Steps + Limitations (DISCUSSION)
+## Discussion
 
-1.  Danceability is not a great predictor for popularity when **not** faceted by genre.
+Our original research questions examined the effect of danceability on different songs and how this changed by genre. We conducted an exploratory data analysis, which showed us that there was a slight positive correlation between danceability and popularity. When faceted by genre, this trend changed. Genres such as rap, pop, and rock had higher positive trendlines that showed positive correlation between danceability and popularity.
 
-2.  Danceability has different impacts on popularity when faceted by genre.
+We then trained linear models to predict popularity based on danceability. This showed us that there is a positive correlation between danceability, which increases when looking by genre. The AIC values for this model showed us that the Latin genre's model was best fit. The General model was the least fit. One limitation of this analysis is that the general model had the most variables, which could have contributed to the high AIC value, rather than model fitness.
 
-3.  Danceability has a positive and significant effect on popularity ratings of general, latin, and rap songs. This relationship varies
+Additionally, we calculated Mean Squared Error (MSE) values for these models. We calculated this with the training data set and with the testing dataset. The values were very similar between datasets, which confirmed that we made models that can predict popularity. We did not over fit the models based on the data, which means these models can be used more universally. We also calculated adjusted r-squared values. These showed that danceability rating as an explanatory variable is not a good predictor of popularity rating in general and in the latin and rap genres. The adjusted R squared values between 0.10-4.0% reveals a very low variability in popularity is explained by the regression model.
 
-    1.  Rap has the highest coefficient
+We chose to calculate the adjusted r-squared over other methods, because it is better fit for the multiple variables that we were exploring. Where the r-squared would have been better for fewer variables. Using the three method (AIC, adjusted r-squared, and MSE) approach, we were able to determine the efficacy of the models we created. These models:
 
-    2.  General has the lowest
+$pop_{general} = 35.3 + 10.9 * danceability$
 
-4.  General model had best fit according to AIC criteria (lowest mean squared error)
+$pop_{latin} = 41.3 + 7.94 * danceability$
 
-5.  The interactive model for danceability \* tempo \* energy has lowest AIC
+$pop_{rap} = 25.9 + 23.9 * danceability$
 
-6.  The additive and interactive models that included the energy variable had lower AIC values
+They show that danceability rating increases the popularity of a song. The latin genre has a mean popularity rating of 41.3, when danceability is 0, which is the highest of the models. Danceability has the largest impact on the popularity rating for rap songs, with a 23.9 increase in popularity for every 1 unit increase in danceability rating. The general model falls between both of these ratings, representing that the latin and rap genres fall on more extreme ends of the spectrum for danceability impacting popularity.
+
+Finally, we conducted a multiple linear regression models to create model fit assessments. Because our EDA had shown that genre has a small impact on popularity when faceted, we explored other variables on the general dataset: Tempo, Danceability, and Energy. One limitation of these models is that they are not faceted by genre. We explored both additive and interactive models:
+
+1.  An additive model for danceability rating + tempo.
+2.  An additive model for danceability rating + energy.
+3.  An additive model for danceability rating + tempo + energy.
+4.  An interaction model for danceability rating \* tempo.
+5.  An interaction model for danceability rating \* energy.
+6.  An interaction model for danceability rating \* tempo \* energy.
+
+The results of these models showed that the interactive model (6) with Danceability, Tempo, and Energy had the lowest AIC. This showed that it was the best fit model to determine popularity of songs. Another interesting conclusion from this test was the impact of Energy on AIC score. Between the interactive and additive models, the ones with energy had the lowest values. In the future, it would be interesting to explore the impact of energy by genre.
+
+We also found the mean squared error value for the test and training set for the most fit model: An interaction model for danceability rating \* tempo \* energy. The MSE was similar between the test and training dataset, showing that this model was not over fit for the data. The model we created can be used on other datasets to determine popularity.
+
+**Limitations**
+
+One limitation on our EDA is that we used random sampling. We did not random sample in a way that came the same proportion of songs for each genre. This could have impacted our results if some genre's were over included in the randomly sampled data. In the future, it would be useful to sample in a more direct way. Another limitation of our multiple linear regression is that we did not explore by genre. This would have helped us answer our research question more fully. In a future project, it would be useful to examine those results in conjunction with what we found. Our analysis could be improved with a ROC curve; however, we chose not to include one because we did not have binary variables. We had explanatory variables that were better fit to be explored with MSE. In a future experiment, it would be useful to use both methods to have a larger set of data to analyze.
+
+One issue with the reliability of our data is the song selection process. Although it was gathered by a genre taxonomist, who is qualified in their field, it would be useful to replicate this project with other songs. There are many songs that are created each year. These results could be skewed by the year the songs were created. The music industry is constantly changing. Additionally, the tastes of listeners can be influenced by trends, movements, and other factors. A limitation of our analysis is that it does not include the year these songs were pulled from.
+
+In the future it would be interesting to explore a new dataset with different songs. A replication of our project could be conducted with newly released songs. It would also be interesting to explore other variables in this dataset such as loudness, key, and tempo. Finally, it would also be interesting to explore other subgenres that are included in the dataset. These could have different complexities that were not captured by the larger categories.
