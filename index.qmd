@@ -5,4 +5,4 @@ format: html
 editor: visual
 ---
 
-Add project abstract here.
+In the music industry there is always a desire to be able to predict the next big song. Doing so would not only impact songwriters and artists, but also avid listeners looking to start listening to songs before they are trending. Different factors will always play into whether or not a song becomes popular. We wish to explore how danceability, in particular, affects the popularity of songs. We are hoping that by exploring this correlation we can create a predictive model for popularity based on danceability. To dig a bit deeper, we sought to explore how this relationship is different across genres - particular that of the Latin and rap genre because of its well-known danceability and popularity in pop culture. We found that our models adequately predicted song popularity by danceability for both training and testing data, indicating its real-world applicability.

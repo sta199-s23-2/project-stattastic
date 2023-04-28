@@ -7,7 +7,7 @@ execute:
   echo: false
 ---
 
-## Introduction and data
+## Introduction and Data
 
 Within the music industry there is always a desire to be able to predict the next big song. Different factors will always play into whether or not a song becomes popular. We wish to explore how danceability, in particular, affects the popularity of songs. To dig a bit deeper, we want to see if the impact of danceability on popularity changes depending on which genre we are exploring. We are hoping that by exploring this correlation we can create a predictive model for popularity based on danceability. Based on the correlations we find by genre this model may be more accurate for certain genres more so than others. We have three research questions: How does danceability affect the popularity of songs? How does this vary between genres? How do other song variables influence this relationship.
 
@@ -188,7 +188,7 @@ For a 1 increase in danceability rating, there's an estimated mean change of a s
 
 When danceability is 0, there is an estimated mean popularity rating of 25.9.
 
-**Training Data Set**
+### **Training Data Set**
 
 Calculations of mean squared error for the training data set from predictions.
 
@@ -211,7 +211,7 @@ pop_pred_rap <- predict(rap_dance, rap_songs) |>
 mean((pop_pred_rap - rap_songs$track_popularity)^2)
 ```
 
-**Testing Data Set**
+### **Testing Data Set**
 
 Calculations of mean squared error for the training data set from predictions.
 
@@ -245,7 +245,7 @@ pop_pred_rap_test <- predict(rap_dance, rap_songs_test) |>
 mean((pop_pred_rap_test - rap_songs_test$track_popularity)^2)
 ```
 
-**MSE Table**
+### **MSE Table**
 
 Summary of the mean squared error results from both training and testing data models.
 
@@ -265,7 +265,7 @@ MSE_table |>
   knitr::kable()
 ```
 
-**Linear Regression Model Fit Assessments**
+### **Linear Regression Model Fit Assessments**
 
 Now we'd like to assess how well the regression model explains the observed data. We will do this by calculating adjusted R squared values.
 
@@ -337,7 +337,7 @@ Based on AIC calculations, the latin dance model was best fit because it had the
 
 These results are important given the MSE results showing that all the models were fit for both training and testing data. There were no major differences between the MSE for the models on the training and testing data. This shows that our models were not overfit - the models and their explanatory variables worked well at predicting popularity for both the trained data and on new data (testing data).
 
-**Multiple Linear Regression Models and Model Fit Assessments**
+## **Multiple Linear Regression Models and Model Fit Assessments**
 
 Now, we'd like to train multiple linear regression models to predict popularity using dance-ability, tempo, and energy. We'll train multiple separate models.
 
@@ -347,6 +347,8 @@ Now, we'd like to train multiple linear regression models to predict popularity 
 4.  An interaction model for danceability rating \* tempo.
 5.  An interaction model for danceability rating \* energy.
 6.  An interaction model for danceability rating \* tempo \* energy.
+
+### Training Data
 
 ```{r}
 #| label: multiple-linear-regression-train
@@ -402,6 +404,8 @@ dance_int_tempo_energy |>
   glance() |>
   pull(AIC) 
 ```
+
+### Testing Data
 
 ```{r}
 #| label: multiple-linear-regression-test
@@ -484,6 +488,8 @@ MLR_AIC_table |>
 
 Given that the interaction model between danceability rating, tempo, and energy resulted in the lowest AIC value (testing data = 60744.13; training data = 243257.6), it is the best fit of the ones assessed at modeling popularity of a song. However, there are very small differences for the AIC results across all the models. We excluded genre in the multiple-linear regression models because we learned that genre did not have significant impacts on our previous predictive models. This caused us to shift our focus to other variables that could potentially impact our predicative models.
 
+### MSE Calculations
+
 ```{r}
 #| label: MSE-calcs
 
@@ -545,7 +551,7 @@ The results of these models showed that the interactive model (6) with Danceabil
 
 We also found the mean squared error value for the test and training set for the most fit model: An interaction model for danceability rating \* tempo \* energy. The MSE was similar between the test and training dataset, showing that this model was not over fit for the data. The model we created can be used on other datasets to determine popularity.
 
-**Limitations**
+### **Limitations**
 
 One limitation on our EDA is that we used random sampling. We did not random sample in a way that gave the same proportion of songs for each genre. This could have impacted our results if some genre's were over included in the randomly sampled data. In the future, it would be useful to sample in a more direct way. Another limitation of our multiple linear regression is that we did not explore by genre. This would have helped us answer our research question more fully. In a future project, it would be useful to examine those results in conjunction with what we found. Our analysis could be improved with a ROC curve; however, we chose not to include one because we did not have binary variables. We had explanatory variables that were better fit to be explored with MSE. In a future experiment, it would be useful to use both methods to have a larger set of data to analyze.
 
